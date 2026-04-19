@@ -61,15 +61,15 @@ const ReadPage = ({ loading, error, quranData }: ReadPageProps) => {
 
   if (loading) {
     return (
-      <section className="flex flex-col gap-4">
-        <p className="text-[#2c3e50]">جار تحميل بيانات القرآن...</p>
+      <section className="page-shell">
+        <p className="text-text-main">جار تحميل بيانات القرآن...</p>
       </section>
     );
   }
 
   if (error) {
     return (
-      <section className="flex flex-col gap-4">
+      <section className="page-shell">
         <p className="font-medium text-red-600">{error}</p>
       </section>
     );
@@ -77,53 +77,48 @@ const ReadPage = ({ loading, error, quranData }: ReadPageProps) => {
 
   if (!chapter) {
     return (
-      <section className="flex flex-col gap-4">
-        <div className="sticky top-0 z-10 mb-1 flex items-center justify-between gap-2.5 rounded-2xl bg-white p-4 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+      <section className="page-shell">
+        <div className="page-header">
           <Button
             type="button"
             variant="outline"
             size="sm"
-            className="border-[#1b5e20] text-[#1b5e20]"
+            className="brand-outline-button"
             onClick={() => navigate("/")}
           >
             رجوع
           </Button>
-          <h2 className="text-xl font-bold">السورة غير موجودة</h2>
+          <h2 className="page-title">السورة غير موجودة</h2>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="flex flex-col gap-4">
-      <div className="sticky top-0 z-10 mb-1 flex items-center justify-between gap-2.5 rounded-2xl bg-white p-4 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+    <section className="page-shell">
+      <div className="page-header">
         <Button
           type="button"
           variant="outline"
           size="sm"
-          className="border-[#1b5e20] text-[#1b5e20]"
+          className="brand-outline-button"
           onClick={() => navigate("/")}
         >
           رجوع
         </Button>
-        <h2 className="text-xl font-bold">{`سورة ${chapter.name_arabic}`}</h2>
+        <h2 className="page-title">{`سورة ${chapter.name_arabic}`}</h2>
         <span />
       </div>
 
       {chapter.id !== 1 && chapter.id !== 9 ? (
-        <div className="mb-1 text-center font-['Amiri'] text-[1.8rem] text-[#1b5e20]">
-          {BISMILLAH}
-        </div>
+        <div className="bismillah">{BISMILLAH}</div>
       ) : null}
 
-      <div className="rounded-2xl bg-white p-7.5 text-justify font-['Amiri'] text-[1.6rem] leading-[2.8] shadow-[0_2px_8px_rgba(0,0,0,0.05)] [text-justify:inter-word]">
+      <div className="quran-reading-panel">
         {currentVerses.map((verse) => (
-          <span
-            key={verse.key}
-            className="cursor-pointer rounded px-1.25 transition-colors hover:bg-[#ffa0001a]"
-          >
+          <span key={verse.key} className="verse-inline">
             {verse.displayText}
-            <span className="mx-2 whitespace-nowrap text-[1.1rem] text-[#ffa000]">
+            <span className="verse-marker">
               ۝{arabicNum(verse.verseNumber)}
             </span>
           </span>

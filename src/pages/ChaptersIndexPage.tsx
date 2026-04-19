@@ -25,9 +25,9 @@ const ChaptersIndexPage = ({
   }, [quranData, surahSearch]);
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="page-shell">
       {loading ? (
-        <p className="text-[#2c3e50]">جار تحميل بيانات القرآن...</p>
+        <p className="text-text-main">جار تحميل بيانات القرآن...</p>
       ) : null}
       {error ? <p className="font-medium text-red-600">{error}</p> : null}
 
@@ -35,13 +35,13 @@ const ChaptersIndexPage = ({
         <>
           <div className="mb-1 flex flex-wrap items-center justify-between gap-2.5">
             <h2 className="text-2xl font-bold">فهرس السور</h2>
-            <div className="min-w-55 flex-1 rounded-[20px] bg-white px-3.75 py-2 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+            <div className="chapter-search-shell">
               <input
                 type="text"
                 placeholder="ابحث عن سورة..."
                 value={surahSearch}
                 onChange={(event) => setSurahSearch(event.target.value)}
-                className="w-full border-0 bg-transparent text-base text-[#2c3e50] outline-none"
+                className="w-full border-0 bg-transparent text-base text-text-main outline-none"
               />
             </div>
           </div>
@@ -51,17 +51,15 @@ const ChaptersIndexPage = ({
               <button
                 key={chapter.id}
                 type="button"
-                className="flex cursor-pointer items-center gap-3 rounded-2xl border border-black/5 bg-white/90 p-3.5 text-right shadow-[0_2px_8px_rgba(0,0,0,0.05)]"
+                className="chapter-card"
                 onClick={() => navigate(`/${chapter.id}`)}
               >
-                <span className="inline-flex size-9 items-center justify-center rounded-full bg-[#1b5e20] font-['Amiri'] font-bold text-white">
-                  {chapter.id}
-                </span>
+                <span className="chapter-index-pill">{chapter.id}</span>
                 <span className="flex flex-1 flex-col">
-                  <span className="font-['Amiri'] text-[1.2rem] text-[#1b5e20]">
+                  <span className="chapter-name">
                     سورة {chapter.name_arabic}
                   </span>
-                  <span className="text-[0.85rem] text-[#7f8c8d]">
+                  <span className="chapter-meta">
                     {chapter.verses_count} آية
                   </span>
                 </span>

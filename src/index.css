@@ -17,6 +17,88 @@
   --text-muted: #7f8c8d;
   --danger: #e74c3c;
   --warning: #f1c40f;
+  --elevation-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --verse-hover-bg: #ffa0001a;
+}
+
+@theme {
+  --font-sans: "Tajawal", "Noto Sans Arabic", sans-serif;
+  --font-serif: "Amiri", "Noto Naskh Arabic", serif;
+
+  --color-brand: #1b5e20;
+  --color-brand-soft: #4c8c4a;
+  --color-accent: #ffa000;
+  --color-page: #f8f9fa;
+  --color-text-main: #2c3e50;
+  --color-text-muted: #7f8c8d;
+  --color-brand-foreground: #ffffff;
+}
+
+@layer components {
+  .page-shell {
+    @apply flex flex-col gap-4;
+  }
+
+  .page-header {
+    @apply sticky top-0 z-10 mb-1 flex items-center justify-between gap-2.5 rounded-2xl bg-white p-4;
+    box-shadow: var(--elevation-soft);
+  }
+
+  .page-title {
+    @apply text-xl font-bold text-text-main;
+  }
+
+  .brand-outline-button {
+    @apply border-brand text-brand;
+  }
+
+  .card-panel {
+    @apply rounded-2xl bg-white;
+    box-shadow: var(--elevation-soft);
+  }
+
+  .chapter-search-shell {
+    @apply min-w-55 flex-1 rounded-[20px] bg-white px-3.75 py-2;
+    box-shadow: var(--elevation-soft);
+  }
+
+  .chapter-card {
+    @apply flex cursor-pointer items-center gap-3 rounded-2xl border border-black/5 bg-white/90 p-3.5 text-right;
+    box-shadow: var(--elevation-soft);
+  }
+
+  .chapter-index-pill {
+    @apply inline-flex size-9 items-center justify-center rounded-full bg-brand font-serif font-bold text-brand-foreground;
+  }
+
+  .chapter-name {
+    @apply font-serif text-[1.2rem] text-brand;
+  }
+
+  .chapter-meta {
+    @apply text-[0.85rem] text-text-muted;
+  }
+
+  .bismillah {
+    @apply mb-1 text-center font-serif text-[1.8rem] text-brand;
+  }
+
+  .quran-reading-panel {
+    @apply rounded-2xl bg-white p-7.5 text-justify font-serif text-[1.6rem] leading-[2.8] [text-justify:inter-word];
+    box-shadow: var(--elevation-soft);
+  }
+
+  .verse-inline {
+    @apply cursor-pointer rounded px-1.25 transition-colors;
+  }
+
+  .verse-inline:hover {
+    background-color: var(--verse-hover-bg);
+  }
+
+  .verse-marker {
+    @apply mx-2 whitespace-nowrap text-[1.1rem] text-accent;
+  }
 }
 
 * {
@@ -31,7 +113,7 @@ body {
   margin: 0;
   min-height: 100vh;
   min-height: 100dvh;
-  font-family: "Tajawal", sans-serif;
+  font-family: var(--font-sans);
   background-color: var(--bg-color);
   background-image: radial-gradient(
     var(--primary-light) 0.5px,
