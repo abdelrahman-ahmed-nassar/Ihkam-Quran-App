@@ -1,10 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
-import { useLiveQuery } from "dexie-react-hooks";
+import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../components/ui/button";
-import { initQuranData, quranTable } from "../db";
 import { BISMILLAH } from "../lib/app-types";
-import type { Chapter } from "../types/quran";
+import type { Chapter, QuranData } from "../types/quran";
 
 type VerseItem = {
   key: string;
@@ -16,23 +14,16 @@ type VerseItem = {
 const arabicNum = (value: number) =>
   value.toString().replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)]);
 
-const ReadPage = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+type ReadPageProps = {
+  loading: boolean;
+  error: string | null;
+  quranData: QuranData | null;
+};
+
+const ReadPage = ({ loading, error, quranData }: ReadPageProps) => {
   const navigate = useNavigate();
   const { surahId } = useParams();
   const currentSurahId = surahId ? Number(surahId) : null;
-  const quranRecord = useLiveQuery(() => quranTable.get("quran"));
-  const quranData = quranRecord?.data;
-
-  useEffect(() => {
-    initQuranData()
-      .catch((err) => {
-        console.error("Failed to initialize Quran data:", err);
-        setError("فشل تحميل بيانات القرآن. حاول إعادة تحميل الصفحة.");
-      })
-      .finally(() => setLoading(false));
-  }, []);
 
   const chapter = useMemo<Chapter | null>(() => {
     if (!quranData || !currentSurahId || Number.isNaN(currentSurahId)) {

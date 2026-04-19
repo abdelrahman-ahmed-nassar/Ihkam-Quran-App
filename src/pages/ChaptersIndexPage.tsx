@@ -1,33 +1,28 @@
-import { useEffect, useMemo, useState } from "react";
-import { useLiveQuery } from "dexie-react-hooks";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { initQuranData, quranTable } from "../db";
-import type { Chapter } from "../types/quran";
+import type { Chapter, QuranData } from "../types/quran";
 
-const ChaptersIndexPage = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+type ChaptersIndexPageProps = {
+  loading: boolean;
+  error: string | null;
+  quranData: QuranData | null;
+};
+
+const ChaptersIndexPage = ({
+  loading,
+  error,
+  quranData,
+}: ChaptersIndexPageProps) => {
   const [surahSearch, setSurahSearch] = useState("");
   const navigate = useNavigate();
-  const quranRecord = useLiveQuery(() => quranTable.get("quran"));
-
-  useEffect(() => {
-    initQuranData()
-      .catch((err) => {
-        console.error("Failed to initialize Quran data:", err);
-        setError("فشل تحميل بيانات القرآن. حاول إعادة تحميل الصفحة.");
-      })
-      .finally(() => setLoading(false));
-  }, []);
 
   const chapters = useMemo<Chapter[]>(() => {
-    const quranData = quranRecord?.data;
     if (!quranData?.chapters) return [];
 
     return Object.values(quranData.chapters)
       .filter((chapter) => chapter.name_arabic.includes(surahSearch.trim()))
       .sort((a, b) => a.id - b.id);
-  }, [quranRecord, surahSearch]);
+  }, [quranData, surahSearch]);
 
   return (
     <section className="flex flex-col gap-4">
