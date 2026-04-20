@@ -9,7 +9,7 @@ const App = () => {
       dir="rtl"
     >
       <main className="min-w-0 flex-1 overflow-y-auto p-5 pb-21.5 min-[900px]:px-5 min-[900px]:pb-5">
-        <HashRouter basename={import.meta.env.BASE_URL}>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<ChaptersIndexPage />} />
             <Route path="/:pageId" element={<ReadPage />} />
