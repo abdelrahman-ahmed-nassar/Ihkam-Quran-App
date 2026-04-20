@@ -8,6 +8,13 @@ import {
 } from "./db";
 import ChaptersIndexPage from "./pages/ChaptersIndexPage";
 import ReadPage from "./pages/ReadPage";
+import {
+  invokePwaInstallPrompt,
+  isRunningAsInstalledPwa,
+  subscribeBeforeInstallPrompt,
+} from "./lib/pwa-install";
+
+const PWA_INSTALL_PROMPT_SESSION_KEY = "pwa-install-prompt-attempted";
 
 const App = () => {
   const [quranChaptersLoading, setQuranChaptersLoading] = useState(true);
@@ -41,6 +48,28 @@ const App = () => {
 
   useEffect(() => {
     void initializeQuranChaptersData();
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || isRunningAsInstalledPwa()) {
+      return;
+    }
+
+    const alreadyAttemptedPrompt =
+      window.sessionStorage.getItem(PWA_INSTALL_PROMPT_SESSION_KEY) === "1";
+    if (alreadyAttemptedPrompt) {
+      return;
+    }
+
+    const unsubscribe = subscribeBeforeInstallPrompt((event) => {
+      window.sessionStorage.setItem(PWA_INSTALL_PROMPT_SESSION_KEY, "1");
+
+      void invokePwaInstallPrompt(event).catch((error: unknown) => {
+        console.error("Failed to show PWA install prompt:", error);
+      });
+    });
+
+    return unsubscribe;
   }, []);
 
   return (
