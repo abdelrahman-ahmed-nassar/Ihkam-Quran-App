@@ -22,10 +22,15 @@ const MAX_DRAG_PX = 120;
 const SWIPE_SETTLE_PX = 16;
 const SWIPE_TRANSITION_MS = 170;
 
-const clampPage = (page: number) =>
-  Math.min(MAX_PAGE, Math.max(MIN_PAGE, page));
+const clampPage = (page: number) => {
+  const normalizedPage = Number.isFinite(page) ? Math.trunc(page) : MIN_PAGE;
+
+  return Math.min(MAX_PAGE, Math.max(MIN_PAGE, normalizedPage));
+};
 
 const formatPageId = (page: number) => page.toString().padStart(3, "0");
+const toEasternArabicDigits = (value: number | string) =>
+  String(value).replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)]);
 
 function getQpcFontName(page: number) {
   return `QCF${String(page).padStart(3, "0")}`;
@@ -42,11 +47,20 @@ function getPageFontPath(page: number) {
 type ReadPageProps = {
   initialPage: number;
   onBackToIndex: () => void;
+  onPageChange?: (page: number) => void;
 };
 
-const ReadPage = ({ initialPage, onBackToIndex }: ReadPageProps) => {
+const ReadPage = ({
+  initialPage,
+  onBackToIndex,
+  onPageChange,
+}: ReadPageProps) => {
   const [currentPage, setCurrentPage] = useState(() => clampPage(initialPage));
   const normalizedPageId = formatPageId(currentPage);
+  const localizedPageNumber = useMemo(
+    () => toEasternArabicDigits(currentPage),
+    [currentPage],
+  );
 
   const [wordsMap, setWordsMap] = useState<WordsMap | null>(null);
   const [chaptersData, setChaptersData] =
@@ -66,6 +80,10 @@ const ReadPage = ({ initialPage, onBackToIndex }: ReadPageProps) => {
   useEffect(() => {
     setCurrentPage(clampPage(initialPage));
   }, [initialPage]);
+
+  useEffect(() => {
+    onPageChange?.(currentPage);
+  }, [currentPage, onPageChange]);
 
   // Help browser prioritize page fonts: current page (preload), adjacent pages (prefetch)
   useEffect(() => {
@@ -427,6 +445,10 @@ const ReadPage = ({ initialPage, onBackToIndex }: ReadPageProps) => {
           </div>
         </section>
       )}
+
+      <div className="pointer-events-none absolute bottom-2 left-1/2 z-20 -translate-x-1/2 rounded-full bg-background/70 px-2 py-0.5 text-[10px] font-medium text-muted-foreground backdrop-blur-sm">
+        {localizedPageNumber}
+      </div>
     </div>
   );
 };

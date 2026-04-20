@@ -1,5 +1,12 @@
-import { useEffect, useState } from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import {
+  HashRouter,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import {
   dropCurrentDb,
   initQuranPagesData,
@@ -9,12 +16,18 @@ import {
 import ChaptersIndexPage from "./pages/ChaptersIndexPage";
 import ReadPage from "./pages/ReadPage";
 
+const parsePageParam = (pageParam: string | undefined) => {
+  if (!pageParam) return null;
+
+  const parsed = Number(pageParam);
+  return Number.isInteger(parsed) ? parsed : null;
+};
+
 const App = () => {
   const [quranChaptersLoading, setQuranChaptersLoading] = useState(true);
   const [quranChaptersError, setQuranChaptersError] = useState<string | null>(
     null,
   );
-  const [selectedPage, setSelectedPage] = useState<number | null>(null);
 
   const initializeQuranChaptersData = async (resetDb = false) => {
     setQuranChaptersLoading(true);
@@ -44,6 +57,46 @@ const App = () => {
     void initializeQuranChaptersData();
   }, []);
 
+  const ChaptersRoute = () => {
+    const navigate = useNavigate();
+
+    return (
+      <ChaptersIndexPage
+        loading={quranChaptersLoading}
+        error={quranChaptersError}
+        onRefreshQuranData={() => initializeQuranChaptersData(true)}
+        onSelectPage={(page) => navigate(`/page/${page}`)}
+      />
+    );
+  };
+
+  const ReadRoute = () => {
+    const navigate = useNavigate();
+    const { pageNumber } = useParams<{ pageNumber: string }>();
+    const parsedPage = parsePageParam(pageNumber);
+
+    const handlePageChange = useCallback(
+      (page: number) => {
+        if (page === parsedPage) return;
+
+        navigate(`/page/${page}`, { replace: true });
+      },
+      [navigate, parsedPage],
+    );
+
+    if (parsedPage === null) {
+      return <Navigate to="/" replace />;
+    }
+
+    return (
+      <ReadPage
+        initialPage={parsedPage}
+        onBackToIndex={() => navigate("/")}
+        onPageChange={handlePageChange}
+      />
+    );
+  };
+
   return (
     <div
       className="flex h-screen min-h-dvh flex-col overflow-hidden min-[900px]:flex-row"
@@ -52,24 +105,9 @@ const App = () => {
       <main className="min-w-0 flex-1 overflow-y-auto p-5 pb-21.5 min-[900px]:px-5 min-[900px]:pb-5">
         <HashRouter>
           <Routes>
-            <Route
-              path="*"
-              element={
-                selectedPage === null ? (
-                  <ChaptersIndexPage
-                    loading={quranChaptersLoading}
-                    error={quranChaptersError}
-                    onRefreshQuranData={() => initializeQuranChaptersData(true)}
-                    onSelectPage={(page) => setSelectedPage(page)}
-                  />
-                ) : (
-                  <ReadPage
-                    initialPage={selectedPage}
-                    onBackToIndex={() => setSelectedPage(null)}
-                  />
-                )
-              }
-            />
+            <Route path="/" element={<ChaptersRoute />} />
+            <Route path="/page/:pageNumber" element={<ReadRoute />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </HashRouter>
       </main>
