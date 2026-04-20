@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { Download } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import {
   invokePwaInstallPrompt,
   isRunningAsInstalledPwa,
@@ -20,7 +19,6 @@ type InstallPWAButtonProps = {
 };
 
 export function InstallPWAButton({
-  className,
   variant,
   size,
 }: InstallPWAButtonProps) {
@@ -58,7 +56,6 @@ export function InstallPWAButton({
       onClick={installApp}
       size={size ?? "lg"}
       variant={variant}
-      className={cn("w-full sm:w-auto", className)}
     >
       <Download data-icon="inline-start" />
       تثبيت التطبيق

@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { useNavigate } from "react-router-dom";
 import { quranChaptersTable } from "../db";
+import { InstallPWAButton } from "../components/install-pwa-button";
 import type { Chapter } from "../types/quran";
 
 type ChaptersIndexPageProps = {
@@ -59,6 +60,11 @@ const ChaptersIndexPage = ({
               >
                 تحديث
               </button>
+              <InstallPWAButton
+                size="default"
+                variant="outline"
+                className="w-auto"
+              />
             </div>
           </div>
 
