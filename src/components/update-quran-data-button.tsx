@@ -1,4 +1,4 @@
-import { resetServiceWorker } from "../lib/reset-service-worker";
+import { resetAppData } from "../lib/reset-service-worker";
 
 type UpdateQuranDataButtonProps = {
   disabled?: boolean;
@@ -11,7 +11,7 @@ export const UpdateQuranDataButton = ({
 }: UpdateQuranDataButtonProps) => {
   const handleUpdate = async () => {
     await onRefresh();
-    await resetServiceWorker();
+    await resetAppData();
   };
 
   return (
