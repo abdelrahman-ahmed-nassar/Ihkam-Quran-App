@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 
 const MIN_PAGE = 1;
 const MAX_PAGE = 604;
+const SWIPE_TRIGGER_PX = 60;
+const MAX_DRAG_PX = 120;
 
 const clampPage = (page: number) =>
   Math.min(MAX_PAGE, Math.max(MIN_PAGE, page));
@@ -39,6 +41,12 @@ const ReadPage = () => {
   const [loadingError, setLoadingError] = useState<string | null>(null);
 
   const [targetPageInput, setTargetPageInput] = useState(normalizedPageId);
+  const [gestureStartX, setGestureStartX] = useState<number | null>(null);
+  const [gestureDeltaX, setGestureDeltaX] = useState(0);
+  const [isDraggingPage, setIsDraggingPage] = useState(false);
+  const [turnDirection, setTurnDirection] = useState<"next" | "prev" | null>(
+    null,
+  );
 
   // Sync input
   useEffect(() => {
@@ -131,9 +139,99 @@ const ReadPage = () => {
     return wordsArray.slice(first - 1, last);
   };
 
-  const goToPage = (page: number) => {
-    navigate(`/${formatPageId(clampPage(page))}`);
+  const goToPage = (page: number, direction?: "next" | "prev") => {
+    const nextPage = clampPage(page);
+    if (nextPage === currentPage) return;
+
+    setTurnDirection(direction ?? (nextPage > currentPage ? "next" : "prev"));
+    navigate(`/${formatPageId(nextPage)}`);
   };
+
+  useEffect(() => {
+    if (!turnDirection) return;
+
+    const timeoutId = window.setTimeout(() => {
+      setTurnDirection(null);
+    }, 220);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [turnDirection]);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      const tagName = target?.tagName;
+      const isEditable =
+        tagName === "INPUT" ||
+        tagName === "TEXTAREA" ||
+        tagName === "SELECT" ||
+        target?.isContentEditable;
+
+      if (isEditable) return;
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goToPage(currentPage + 1, "next");
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goToPage(currentPage - 1, "prev");
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [currentPage]);
+
+  const onTouchStart = (event: React.TouchEvent<HTMLElement>) => {
+    const point = event.touches[0];
+    if (!point) return;
+
+    setGestureStartX(point.clientX);
+    setGestureDeltaX(0);
+    setIsDraggingPage(true);
+  };
+
+  const onTouchMove = (event: React.TouchEvent<HTMLElement>) => {
+    if (gestureStartX === null) return;
+
+    const point = event.touches[0];
+    if (!point) return;
+
+    setGestureDeltaX(point.clientX - gestureStartX);
+  };
+
+  const onTouchEnd = () => {
+    if (Math.abs(gestureDeltaX) >= SWIPE_TRIGGER_PX) {
+      if (gestureDeltaX < 0) {
+        goToPage(currentPage + 1, "next");
+      } else {
+        goToPage(currentPage - 1, "prev");
+      }
+    }
+
+    setGestureStartX(null);
+    setGestureDeltaX(0);
+    setIsDraggingPage(false);
+  };
+
+  const dragOffset = Math.max(
+    -MAX_DRAG_PX,
+    Math.min(MAX_DRAG_PX, gestureDeltaX),
+  );
+  const settleOffset =
+    turnDirection === "next" ? -28 : turnDirection === "prev" ? 28 : 0;
+  const pageOffset = isDraggingPage ? dragOffset : settleOffset;
+  const pageOpacity =
+    isDraggingPage && dragOffset !== 0
+      ? 1 - Math.min(0.18, Math.abs(dragOffset) / 400)
+      : 1;
 
   const onGoToPage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -158,22 +256,6 @@ const ReadPage = () => {
 
       {/* Navigation */}
       <div className="flex flex-wrap items-center gap-2">
-        <Button
-          variant="outline"
-          onClick={() => goToPage(currentPage - 1)}
-          disabled={currentPage <= MIN_PAGE}
-        >
-          Previous
-        </Button>
-
-        <Button
-          variant="outline"
-          onClick={() => goToPage(currentPage + 1)}
-          disabled={currentPage >= MAX_PAGE}
-        >
-          Next
-        </Button>
-
         <form className="flex items-center gap-2" onSubmit={onGoToPage}>
           <label>Page</label>
           <input
@@ -186,6 +268,10 @@ const ReadPage = () => {
           />
           <Button type="submit">Go</Button>
         </form>
+
+        <p className="text-sm text-muted-foreground">
+          Swipe left/right or use keyboard arrows to turn pages.
+        </p>
       </div>
 
       <p>
@@ -202,11 +288,17 @@ const ReadPage = () => {
           className="mx-auto w-full max-w-5xl select-none overflow-x-auto"
           dir="rtl"
           aria-label={`Mushaf page ${normalizedPageId}`}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onTouchCancel={onTouchEnd}
         >
           <div
-            className="w-full p-2 text-[clamp(1.15rem,6.3vw,2rem)] leading-[1.75] text-right [text-align-last:justify] [unicode-bidi:embed] sm:p-3 sm:text-4xl sm:leading-[2.05] md:p-8 md:text-6xl"
+            className={`w-full p-2 text-[clamp(1.15rem,6.3vw,2rem)] leading-[1.75] text-right [text-align-last:justify] [unicode-bidi:embed] sm:p-3 sm:text-4xl sm:leading-[2.05] md:p-8 md:text-6xl ${isDraggingPage ? "" : "transition-transform duration-200 ease-out"}`}
             style={{
               fontFamily: getQpcFontName(currentPage),
+              transform: `translateX(${pageOffset}px)`,
+              opacity: pageOpacity,
             }}
           >
             {pageLines.map((line, idx) => {
