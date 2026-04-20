@@ -1,11 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { House } from "lucide-react";
+import { getChapterById } from "@/lib/quran";
 
 import type { Word, WordsMap } from "@/types/quran-words";
 import type { QuranLine } from "@/types/quran-layout";
 import {
+  getQuranData,
   getQuranPagesData,
   getQuranWordsData,
+  initQuranData,
   initQuranPagesData,
   initQuranWordsData,
 } from "@/db";
@@ -32,7 +36,7 @@ function getQpcFontName(page: number) {
 }
 
 function getQpcFontStack(page: number) {
-  return `${getQpcFontName(page)}, UthmanicHafs, Tahoma, Arial, sans-serif`;
+  return `${getQpcFontName(page)}, UthmanicHafs, Arial, sans-serif`;
 }
 
 function getPageFontPath(page: number) {
@@ -47,21 +51,17 @@ const ReadPage = () => {
   const normalizedPageId = formatPageId(currentPage);
 
   const [wordsMap, setWordsMap] = useState<WordsMap | null>(null);
+  const [chaptersData, setChaptersData] =
+    useState<Awaited<ReturnType<typeof getQuranData>>>(null);
   const [layout, setLayout] = useState<QuranLine[]>([]);
   const [loadingError, setLoadingError] = useState<string | null>(null);
 
-  const [targetPageInput, setTargetPageInput] = useState(normalizedPageId);
   const [gestureStartX, setGestureStartX] = useState<number | null>(null);
   const [gestureDeltaX, setGestureDeltaX] = useState(0);
   const [isDraggingPage, setIsDraggingPage] = useState(false);
   const [turnDirection, setTurnDirection] = useState<"next" | "prev" | null>(
     null,
   );
-
-  // Sync input
-  useEffect(() => {
-    setTargetPageInput(normalizedPageId);
-  }, [normalizedPageId]);
 
   // Redirect invalid route
   useEffect(() => {
@@ -101,16 +101,19 @@ const ReadPage = () => {
   useEffect(() => {
     const load = async () => {
       try {
-        const [cachedWords, cachedPages] = await Promise.all([
+        const [cachedWords, cachedPages, cachedChapters] = await Promise.all([
           getQuranWordsData(),
           getQuranPagesData(),
+          getQuranData(),
         ]);
-        const [wordsData, layoutData] = await Promise.all([
+        const [wordsData, layoutData, chapterData] = await Promise.all([
           cachedWords ? Promise.resolve(cachedWords) : initQuranWordsData(),
           cachedPages ? Promise.resolve(cachedPages) : initQuranPagesData(),
+          cachedChapters ? Promise.resolve(cachedChapters) : initQuranData(),
         ]);
 
         setWordsMap(wordsData);
+        setChaptersData(chapterData);
         setLayout(layoutData);
         setLoadingError(null);
       } catch (err) {
@@ -128,6 +131,15 @@ const ReadPage = () => {
 
     return Object.values(wordsMap).sort((a, b) => a.id - b.id);
   }, [wordsMap]);
+
+  const quranRecord = useMemo(() => {
+    if (!chaptersData) return undefined;
+
+    return {
+      id: "quranChapters",
+      chaptersData,
+    };
+  }, [chaptersData]);
 
   // 🔥 Filter lines for current page
   const pageLines = useMemo(() => {
@@ -241,59 +253,45 @@ const ReadPage = () => {
       ? 1 - Math.min(0.18, Math.abs(dragOffset) / 400)
       : 1;
 
-  const onGoToPage = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const parsed = Number.parseInt(targetPageInput, 10);
-    if (Number.isNaN(parsed)) {
-      setTargetPageInput(normalizedPageId);
-      return;
-    }
-
-    goToPage(parsed);
-  };
+  // Compute font-size so every line fits within the screen height.
+  // Each line occupies (fontSize × LINE_HEIGHT_RATIO) px vertically.
+  // Reserve ~2.5rem for the floating home button so it never overlaps text.
+  const LINE_HEIGHT_RATIO = 2.08;
+  const lineCount = Math.max(pageLines.length, 1);
+  const dynamicFontSize = `min(calc((100dvh - 5rem) / ${lineCount * LINE_HEIGHT_RATIO}), calc((100vw - 1.5rem) / 17))`;
 
   return (
-    <div className="flex flex-col gap-4">
-      <header className="flex items-center justify-between gap-2 border-b pb-3">
-        <Button variant="outline" onClick={() => navigate("/")}>
-          العودة للرئيسية
-        </Button>
-        <h1 className="text-lg font-semibold">القراءة</h1>
-      </header>
+    // Fixed viewport shell — absolutely no scroll in any direction
+    <div className="fixed inset-0 overflow-hidden bg-background">
+      {/* Home button — floats above the page, subtle until hovered */}
+      <Button
+        variant="ghost"
+        size="icon-xs"
+        aria-label="العودة للرئيسية"
+        onClick={() => navigate("/")}
+        className="absolute left-2 top-2 z-20 opacity-40 transition-opacity hover:opacity-100"
+      >
+        <House />
+      </Button>
 
-      {/* Navigation */}
-      <div className="flex flex-wrap items-center gap-2">
-        <form className="flex items-center gap-2" onSubmit={onGoToPage}>
-          <label>Page</label>
-          <input
-            type="number"
-            min={MIN_PAGE}
-            max={MAX_PAGE}
-            value={targetPageInput}
-            onChange={(e) => setTargetPageInput(e.target.value)}
-            className="h-8 w-24 rounded-md border px-2"
-          />
-          <Button type="submit">Go</Button>
-        </form>
-
-        <p className="text-sm text-muted-foreground">
-          Swipe left/right or use keyboard arrows to turn pages.
+      {/* Error state */}
+      {loadingError && (
+        <p className="flex h-full items-center justify-center text-destructive">
+          {loadingError}
         </p>
-      </div>
+      )}
 
-      <p>
-        pageId: {normalizedPageId} ({MIN_PAGE} - {MAX_PAGE})
-      </p>
+      {/* Loading state */}
+      {!wordsMap && !loadingError && (
+        <p className="flex h-full items-center justify-center text-muted-foreground">
+          …
+        </p>
+      )}
 
-      {/* 🧾 Render */}
-      {loadingError ? (
-        <p className="text-destructive">{loadingError}</p>
-      ) : !wordsMap ? (
-        <p>Loading...</p>
-      ) : (
+      {/* 🧾 Page render */}
+      {wordsMap && (
         <section
-          className="mx-auto w-full max-w-5xl select-none overflow-x-auto"
+          className="flex h-full w-full select-none items-center justify-center overflow-hidden"
           dir="rtl"
           aria-label={`Quran page ${normalizedPageId}`}
           onTouchStart={onTouchStart}
@@ -302,9 +300,13 @@ const ReadPage = () => {
           onTouchCancel={onTouchEnd}
         >
           <div
-            className={`w-full p-2 text-[clamp(1.15rem,6.3vw,2rem)] leading-[1.75] text-right [text-align-last:justify] [unicode-bidi:embed] sm:p-3 sm:text-4xl sm:leading-[2.05] md:p-8 md:text-6xl ${isDraggingPage ? "" : "transition-transform duration-200 ease-out"}`}
+            className={`mx-auto w-max max-w-full px-3 [unicode-bidi:embed] ${
+              isDraggingPage ? "" : "transition-transform duration-200 ease-out"
+            }`}
             style={{
               fontFamily: getQpcFontStack(currentPage),
+              fontSize: dynamicFontSize,
+              lineHeight: LINE_HEIGHT_RATIO,
               transform: `translateX(${pageOffset}px)`,
               opacity: pageOpacity,
             }}
@@ -313,15 +315,18 @@ const ReadPage = () => {
               const lineKey = `${line.line_number}-${idx}`;
 
               if (line.line_type === "surah_name") {
+                const chapter = getChapterById(
+                  quranRecord,
+                  String(line.surah_number),
+                );
+
                 return (
                   <div
                     key={lineKey}
-                    className="mb-2 whitespace-nowrap text-center font-bold [text-align-last:center]"
-                    style={{
-                      fontFamily: getQpcFontStack(currentPage),
-                    }}
+                    className="w-full overflow-hidden whitespace-nowrap text-center font-bold [text-align-last:center]"
+                    style={{ fontFamily: "UthmanicHafs, Arial, sans-serif" }}
                   >
-                    سورة {line.surah_number}
+                    سورة {chapter?.name_arabic ?? line.surah_number}
                   </div>
                 );
               }
@@ -330,7 +335,7 @@ const ReadPage = () => {
                 return (
                   <div
                     key={lineKey}
-                    className="mb-2 flex items-center justify-center whitespace-nowrap [text-align-last:center]"
+                    className="flex w-full items-center justify-center overflow-hidden whitespace-nowrap [text-align-last:center]"
                     style={{
                       fontFamily:
                         "QCFBSML, UthmanicHafs, Tahoma, Arial, sans-serif",
@@ -349,27 +354,24 @@ const ReadPage = () => {
               return (
                 <div
                   key={lineKey}
-                  className="mb-1 block w-full whitespace-nowrap text-right [direction:rtl] md:mb-3"
+                  // text-[0] collapses inline whitespace gaps for tight justification;
+                  // each <span> restores its own size via text-[1em].
+                  className={`block w-full overflow-hidden whitespace-nowrap text-[0] [direction:rtl] ${
+                    line.is_centered
+                      ? "text-center [text-align-last:center]"
+                      : "text-justify [text-align-last:justify]"
+                  }`}
                 >
-                  {/* font-size: 0 removes inter-element whitespace for precise justification */}
-                  <div
-                    className={
-                      line.is_centered
-                        ? "block w-full whitespace-nowrap text-[0] text-center [text-align-last:center]"
-                        : "block w-full whitespace-nowrap text-[0] text-justify [text-align-last:justify]"
-                    }
-                  >
-                    {words.map((word) => (
-                      <span
-                        key={word.id}
-                        id={`word-${word.id}`}
-                        className="inline-block align-baseline text-[clamp(1.15rem,6.3vw,2rem)] sm:text-4xl md:text-6xl"
-                        data-location={word.location}
-                      >
-                        {word.textGlyph}
-                      </span>
-                    ))}
-                  </div>
+                  {words.map((word) => (
+                    <span
+                      key={word.id}
+                      id={`word-${word.id}`}
+                      className="inline-block align-baseline text-[1em]"
+                      data-location={word.location}
+                    >
+                      {word.textGlyph}
+                    </span>
+                  ))}
                 </div>
               );
             })}
