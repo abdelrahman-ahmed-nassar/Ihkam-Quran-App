@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => ({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.svg", "icon-192.png", "icon-512.png"],
+      includeAssets: ["favicon.ico", "icon-192.png", "icon-512.png"],
       manifest: false,
       workbox: {
         navigateFallback: "./index.html",
