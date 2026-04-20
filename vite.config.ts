@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => ({
       workbox: {
         navigateFallback: "./index.html",
         globPatterns: ["**/*.{js,css,html,svg,png,ico,json}"],
+        globIgnores: ["**/qpc-v2.json"],
       },
     }),
   ],
