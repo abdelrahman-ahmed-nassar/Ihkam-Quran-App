@@ -13,3 +13,7 @@ https://qul.tarteel.ai/resources/mushaf-layout
 
 
 https://qul.tarteel.ai/docs/mushaf-layout
+
+http://quranportal.io/blog/rendering-the-quran-mushaf-digitally
+
+https://api-docs.quran.foundation/docs/tutorials/fonts/font-rendering/

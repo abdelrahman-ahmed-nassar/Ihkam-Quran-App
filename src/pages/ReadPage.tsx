@@ -23,6 +23,10 @@ function getQpcFontName(page: number) {
   return `QCF2${String(page).padStart(3, "0")}`;
 }
 
+function getPageFontPath(page: number) {
+  return `${import.meta.env.BASE_URL}fonts/QUL/QUL${formatPageId(page)}.ttf`;
+}
+
 const ReadPage = () => {
   const { pageId } = useParams();
   const navigate = useNavigate();
@@ -32,6 +36,7 @@ const ReadPage = () => {
 
   const [wordsMap, setWordsMap] = useState<WordsMap | null>(null);
   const [layout, setLayout] = useState<MushafLine[]>([]);
+  const [loadingError, setLoadingError] = useState<string | null>(null);
 
   const [targetPageInput, setTargetPageInput] = useState(normalizedPageId);
 
@@ -47,6 +52,33 @@ const ReadPage = () => {
     }
   }, [pageId, normalizedPageId, navigate]);
 
+  // Help browser prioritize page fonts: current page (preload), adjacent pages (prefetch)
+  useEffect(() => {
+    const pagesToWarm = [currentPage, currentPage - 1, currentPage + 1].filter(
+      (page) => page >= MIN_PAGE && page <= MAX_PAGE,
+    );
+
+    const createdLinks: HTMLLinkElement[] = [];
+
+    for (const page of pagesToWarm) {
+      const link = document.createElement("link");
+      link.rel = page === currentPage ? "preload" : "prefetch";
+      link.as = "font";
+      link.type = "font/ttf";
+      link.href = getPageFontPath(page);
+      link.crossOrigin = "anonymous";
+
+      document.head.appendChild(link);
+      createdLinks.push(link);
+    }
+
+    return () => {
+      for (const link of createdLinks) {
+        link.remove();
+      }
+    };
+  }, [currentPage]);
+
   // Load ALL data once
   useEffect(() => {
     const load = async () => {
@@ -56,12 +88,20 @@ const ReadPage = () => {
           fetch(`${import.meta.env.BASE_URL}mushaf-layout/pages.json`),
         ]);
 
+        if (!wordsRes.ok || !layoutRes.ok) {
+          throw new Error(
+            `Failed to fetch mushaf data (${wordsRes.status}/${layoutRes.status})`,
+          );
+        }
+
         const wordsData: WordsMap = await wordsRes.json();
         const layoutData: MushafLine[] = await layoutRes.json();
 
         setWordsMap(wordsData);
         setLayout(layoutData);
+        setLoadingError(null);
       } catch (err) {
+        setLoadingError("تعذر تحميل بيانات المصحف");
         console.error("Failed to load mushaf data", err);
       }
     };
@@ -78,7 +118,9 @@ const ReadPage = () => {
 
   // 🔥 Filter lines for current page
   const pageLines = useMemo(() => {
-    return layout.filter((l) => l.page_number === currentPage);
+    return layout
+      .filter((line) => line.page_number === currentPage)
+      .sort((a, b) => a.line_number - b.line_number);
   }, [layout, currentPage]);
 
   // 🔥 Fast slice (O(1))
@@ -151,47 +193,83 @@ const ReadPage = () => {
       </p>
 
       {/* 🧾 Render */}
-      {!wordsMap ? (
+      {loadingError ? (
+        <p className="text-destructive">{loadingError}</p>
+      ) : !wordsMap ? (
         <p>Loading...</p>
       ) : (
-        pageLines.map((line, idx) => {
-          // 🔹 Special lines
-          if (line.line_type === "surah_name") {
-            return (
-              <div key={idx} className="text-center font-bold">
-                سورة {line.surah_number}
-              </div>
-            );
-          }
+        <section
+          className="mx-auto w-full max-w-5xl select-none overflow-x-auto"
+          dir="rtl"
+          aria-label={`Mushaf page ${normalizedPageId}`}
+        >
+          <div
+            className="w-full p-2 text-[clamp(1.15rem,6.3vw,2rem)] leading-[1.75] text-right [text-align-last:justify] [unicode-bidi:embed] sm:p-3 sm:text-4xl sm:leading-[2.05] md:p-8 md:text-6xl"
+            style={{
+              fontFamily: getQpcFontName(currentPage),
+            }}
+          >
+            {pageLines.map((line, idx) => {
+              const lineKey = `${line.line_number}-${idx}`;
 
-          if (line.line_type === "basmallah") {
-            return (
-              <div
-                key={idx}
-                className="text-center"
-                style={{ fontFamily: "QULBSML" }}
-              >
-                ﷽
-              </div>
-            );
-          }
+              if (line.line_type === "surah_name") {
+                return (
+                  <div
+                    key={lineKey}
+                    className="mb-2 whitespace-nowrap text-center font-bold [text-align-last:center]"
+                    style={{ fontFamily: getQpcFontName(currentPage) }}
+                  >
+                    سورة {line.surah_number}
+                  </div>
+                );
+              }
 
-          // 🔹 Ayah line
-          const words = getWordsSlice(line.first_word_id, line.last_word_id);
+              if (line.line_type === "basmallah") {
+                return (
+                  <div
+                    key={lineKey}
+                    className="mb-2 flex items-center justify-center whitespace-nowrap [text-align-last:center]"
+                    style={{ fontFamily: "QCF2BSML" }}
+                  >
+                    ﷽
+                  </div>
+                );
+              }
 
-          return (
-            <div
-              key={idx}
-              className="line"
-              style={{
-                fontFamily: getQpcFontName(currentPage),
-                textAlign: line.is_centered ? "center" : "right",
-              }}
-            >
-              {words.map((w) => w.text).join(" ")}
-            </div>
-          );
-        })
+              const words = getWordsSlice(
+                line.first_word_id,
+                line.last_word_id,
+              );
+
+              return (
+                <div
+                  key={lineKey}
+                  className="mb-1 block w-full whitespace-nowrap text-right [direction:rtl] md:mb-3"
+                >
+                  {/* font-size: 0 removes inter-element whitespace for precise justification */}
+                  <div
+                    className={
+                      line.is_centered
+                        ? "block w-full whitespace-nowrap text-[0] text-center [text-align-last:center]"
+                        : "block w-full whitespace-nowrap text-[0] text-justify [text-align-last:justify]"
+                    }
+                  >
+                    {words.map((word) => (
+                      <span
+                        key={word.id}
+                        id={`word-${word.id}`}
+                        className="inline-block align-baseline text-[clamp(1.15rem,6.3vw,2rem)] sm:text-4xl md:text-6xl"
+                        data-location={word.location}
+                      >
+                        {word.text}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
       )}
     </div>
   );
