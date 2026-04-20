@@ -18,7 +18,11 @@ export default defineConfig(({ mode }) => ({
       workbox: {
         navigateFallback: "./index.html",
         globPatterns: ["**/*.{js,css,html,svg,png,ico,json,ttf,woff,woff2}"],
-        globIgnores: ["**/quran.json", "**/quran_pages.json", "**/quran_chapters.json"],
+        globIgnores: [
+          "**/quran.json",
+          "**/quran_pages.json",
+          "**/quran_chapters.json",
+        ],
       },
     }),
   ],
