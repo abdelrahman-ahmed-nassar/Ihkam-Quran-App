@@ -1,130 +1,199 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "../components/ui/button";
-import { BISMILLAH } from "../lib/app-types";
-import type { Chapter, QuranData } from "../types/quran";
 
-type VerseItem = {
-  key: string;
-  verseNumber: number;
-  text: string;
-  displayText: string;
+import type { Word, WordsMap } from "@/types/mushaf";
+import type { MushafLine } from "@/types/mushaf-layout";
+
+import { Button } from "@/components/ui/button";
+
+const MIN_PAGE = 1;
+const MAX_PAGE = 604;
+
+const clampPage = (page: number) =>
+  Math.min(MAX_PAGE, Math.max(MIN_PAGE, page));
+
+const formatPageId = (page: number) => page.toString().padStart(3, "0");
+
+const parseRoutePage = (value?: string) => {
+  const parsed = Number.parseInt(value ?? "", 10);
+  return Number.isNaN(parsed) ? MIN_PAGE : clampPage(parsed);
 };
 
-const arabicNum = (value: number) =>
-  value.toString().replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)]);
+function getQpcFontName(page: number) {
+  return `QCF2${String(page).padStart(3, "0")}`;
+}
 
-type ReadPageProps = {
-  loading: boolean;
-  error: string | null;
-  quranData: QuranData | null;
-};
-
-const ReadPage = ({ loading, error, quranData }: ReadPageProps) => {
+const ReadPage = () => {
+  const { pageId } = useParams();
   const navigate = useNavigate();
-  const { surahId } = useParams();
-  const currentSurahId = surahId ? Number(surahId) : null;
 
-  const chapter = useMemo<Chapter | null>(() => {
-    if (!quranData || !currentSurahId || Number.isNaN(currentSurahId)) {
-      return null;
+  const currentPage = parseRoutePage(pageId);
+  const normalizedPageId = formatPageId(currentPage);
+
+  const [wordsMap, setWordsMap] = useState<WordsMap | null>(null);
+  const [layout, setLayout] = useState<MushafLine[]>([]);
+
+  const [targetPageInput, setTargetPageInput] = useState(normalizedPageId);
+
+  // Sync input
+  useEffect(() => {
+    setTargetPageInput(normalizedPageId);
+  }, [normalizedPageId]);
+
+  // Redirect invalid route
+  useEffect(() => {
+    if (pageId !== normalizedPageId) {
+      navigate(`/${normalizedPageId}`, { replace: true });
     }
-    return quranData.chapters[String(currentSurahId) as `${number}`] ?? null;
-  }, [quranData, currentSurahId]);
+  }, [pageId, normalizedPageId, navigate]);
 
-  const currentVerses = useMemo<VerseItem[]>(() => {
-    if (!quranData || !currentSurahId || Number.isNaN(currentSurahId)) {
-      return [];
+  // Load ALL data once
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const [wordsRes, layoutRes] = await Promise.all([
+          fetch("/qpc-v2.json"),
+          fetch("/mushaf-layout/pages.json"),
+        ]);
+
+        const wordsData: WordsMap = await wordsRes.json();
+        const layoutData: MushafLine[] = await layoutRes.json();
+
+        setWordsMap(wordsData);
+        setLayout(layoutData);
+      } catch (err) {
+        console.error("Failed to load mushaf data", err);
+      }
+    };
+
+    void load();
+  }, []);
+
+  // 🔥 Convert WordsMap → sorted array ONCE
+  const wordsArray = useMemo(() => {
+    if (!wordsMap) return [];
+
+    return Object.values(wordsMap).sort((a, b) => a.id - b.id);
+  }, [wordsMap]);
+
+  // 🔥 Filter lines for current page
+  const pageLines = useMemo(() => {
+    return layout.filter((l) => l.page_number === currentPage);
+  }, [layout, currentPage]);
+
+  // 🔥 Fast slice (O(1))
+  const getWordsSlice = (first: number, last: number): Word[] => {
+    if (first === 0 && last === 0) return [];
+
+    // ids are 1-based → array is 0-based
+    return wordsArray.slice(first - 1, last);
+  };
+
+  const goToPage = (page: number) => {
+    navigate(`/${formatPageId(clampPage(page))}`);
+  };
+
+  const onGoToPage = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const parsed = Number.parseInt(targetPageInput, 10);
+    if (Number.isNaN(parsed)) {
+      setTargetPageInput(normalizedPageId);
+      return;
     }
 
-    return Object.entries(quranData.verses)
-      .filter(([key]) => key.startsWith(`${currentSurahId}:`))
-      .map(([key, text]) => {
-        const verseNumber = Number(key.split(":")[1]);
-        const displayText =
-          verseNumber === 1 &&
-          currentSurahId !== 1 &&
-          currentSurahId !== 9 &&
-          text.startsWith(`${BISMILLAH} `)
-            ? text.replace(`${BISMILLAH} `, "")
-            : text;
-
-        return {
-          key,
-          verseNumber,
-          text,
-          displayText,
-        };
-      })
-      .sort((a, b) => a.verseNumber - b.verseNumber);
-  }, [quranData, currentSurahId]);
-
-  if (loading) {
-    return (
-      <section className="page-shell">
-        <p className="text-text-main">جار تحميل بيانات القرآن...</p>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section className="page-shell">
-        <p className="font-medium text-red-600">{error}</p>
-      </section>
-    );
-  }
-
-  if (!chapter) {
-    return (
-      <section className="page-shell">
-        <div className="page-header">
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="brand-outline-button"
-            onClick={() => navigate("/")}
-          >
-            رجوع
-          </Button>
-          <h2 className="page-title">السورة غير موجودة</h2>
-        </div>
-      </section>
-    );
-  }
+    goToPage(parsed);
+  };
 
   return (
-    <section className="page-shell">
-      <div className="page-header">
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          className="brand-outline-button"
-          onClick={() => navigate("/")}
-        >
-          رجوع
+    <div className="flex flex-col gap-4">
+      <header className="flex items-center justify-between gap-2 border-b pb-3">
+        <Button variant="outline" onClick={() => navigate("/")}>
+          العودة للرئيسية
         </Button>
-        <h2 className="page-title">{`سورة ${chapter.name_arabic}`}</h2>
-        <span />
+        <h1 className="text-lg font-semibold">القراءة</h1>
+      </header>
+
+      {/* Navigation */}
+      <div className="flex flex-wrap items-center gap-2">
+        <Button
+          variant="outline"
+          onClick={() => goToPage(currentPage - 1)}
+          disabled={currentPage <= MIN_PAGE}
+        >
+          Previous
+        </Button>
+
+        <Button
+          variant="outline"
+          onClick={() => goToPage(currentPage + 1)}
+          disabled={currentPage >= MAX_PAGE}
+        >
+          Next
+        </Button>
+
+        <form className="flex items-center gap-2" onSubmit={onGoToPage}>
+          <label>Page</label>
+          <input
+            type="number"
+            min={MIN_PAGE}
+            max={MAX_PAGE}
+            value={targetPageInput}
+            onChange={(e) => setTargetPageInput(e.target.value)}
+            className="h-8 w-24 rounded-md border px-2"
+          />
+          <Button type="submit">Go</Button>
+        </form>
       </div>
 
-      {chapter.id !== 1 && chapter.id !== 9 ? (
-        <div className="bismillah">{BISMILLAH}</div>
-      ) : null}
+      <p>
+        pageId: {normalizedPageId} ({MIN_PAGE} - {MAX_PAGE})
+      </p>
 
-      <div className="quran-reading-panel">
-        {currentVerses.map((verse) => (
-          <span key={verse.key} className="verse-inline">
-            {verse.displayText}
-            <span className="verse-marker">
-              ۝{arabicNum(verse.verseNumber)}
-            </span>
-          </span>
-        ))}
-      </div>
-    </section>
+      {/* 🧾 Render */}
+      {!wordsMap ? (
+        <p>Loading...</p>
+      ) : (
+        pageLines.map((line, idx) => {
+          // 🔹 Special lines
+          if (line.line_type === "surah_name") {
+            return (
+              <div key={idx} className="text-center font-bold">
+                سورة {line.surah_number}
+              </div>
+            );
+          }
+
+          if (line.line_type === "basmallah") {
+            return (
+              <div
+                key={idx}
+                className="text-center"
+                style={{ fontFamily: "QULBSML" }}
+              >
+                ﷽
+              </div>
+            );
+          }
+
+          // 🔹 Ayah line
+          const words = getWordsSlice(line.first_word_id, line.last_word_id);
+
+          return (
+            <div
+              key={idx}
+              className="line"
+              style={{
+                fontFamily: getQpcFontName(currentPage),
+                textAlign: line.is_centered ? "center" : "right",
+              }}
+            >
+              {words.map((w) => w.text).join(" ")}
+            </div>
+          );
+        })
+      )}
+    </div>
   );
 };
 

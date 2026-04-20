@@ -1,20 +1,40 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useLiveQuery } from "dexie-react-hooks";
 import { useNavigate } from "react-router-dom";
-import type { Chapter, QuranData } from "../types/quran";
+import { dropCurrentDb, initQuranData, quranTable } from "../db";
+import type { Chapter } from "../types/quran";
 
-type ChaptersIndexPageProps = {
-  loading: boolean;
-  error: string | null;
-  quranData: QuranData | null;
-};
-
-const ChaptersIndexPage = ({
-  loading,
-  error,
-  quranData,
-}: ChaptersIndexPageProps) => {
+const ChaptersIndexPage = () => {
   const [surahSearch, setSurahSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const quranRecord = useLiveQuery(() => quranTable.get("quran"));
+  const quranData = quranRecord?.data ?? null;
+
+  useEffect(() => {
+    initQuranData()
+      .catch((err) => {
+        console.error("Failed to initialize Quran data:", err);
+        setError("فشل تحميل بيانات القرآن. حاول إعادة تحميل الصفحة.");
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  const refreshQuranData = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      await dropCurrentDb();
+      await initQuranData();
+    } catch (err) {
+      console.error("Failed to refresh Quran data:", err);
+      setError("فشل تحديث بيانات القرآن. حاول مرة أخرى.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const chapters = useMemo<Chapter[]>(() => {
     if (!quranData?.chapters) return [];
@@ -35,14 +55,24 @@ const ChaptersIndexPage = ({
         <>
           <div className="mb-1 flex flex-wrap items-center justify-between gap-2.5">
             <h2 className="text-2xl font-bold">فهرس السور</h2>
-            <div className="chapter-search-shell">
-              <input
-                type="text"
-                placeholder="ابحث عن سورة..."
-                value={surahSearch}
-                onChange={(event) => setSurahSearch(event.target.value)}
-                className="w-full border-0 bg-transparent text-base text-text-main outline-none"
-              />
+            <div className="flex w-full items-center gap-2">
+              <div className="chapter-search-shell">
+                <input
+                  type="text"
+                  placeholder="ابحث عن سورة..."
+                  value={surahSearch}
+                  onChange={(event) => setSurahSearch(event.target.value)}
+                  className="w-full border-0 bg-transparent text-base text-text-main outline-none"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={refreshQuranData}
+                disabled={loading}
+                className="rounded-md border border-text-main/20 px-3 py-2 text-sm font-medium text-text-main transition hover:bg-text-main/5 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                تحديث
+              </button>
             </div>
           </div>
 
@@ -52,7 +82,7 @@ const ChaptersIndexPage = ({
                 key={chapter.id}
                 type="button"
                 className="chapter-card"
-                onClick={() => navigate(`/${chapter.id}`)}
+                onClick={() => navigate(`/${chapter.startPage}`)}
               >
                 <span className="chapter-index-pill">{chapter.id}</span>
                 <span className="flex flex-1 flex-col">

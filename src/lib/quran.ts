@@ -38,26 +38,3 @@ export function getChapterById(
   if (!chapterId || !quranRecord?.data?.chapters) return undefined;
   return quranRecord.data.chapters[chapterId as ChapterId];
 }
-
-export function getChapterVerses(
-  quranRecord?: QuranRecord,
-  chapterId?: string,
-  searchQuery = "",
-): Array<{ verseNumber: number; text: string }> {
-  if (!chapterId || !quranRecord?.data?.verses) return [];
-
-  const normalizedQuery = searchQuery.trim().toLowerCase();
-
-  return Object.entries(quranRecord.data.verses)
-    .filter(([key]) => key.startsWith(`${chapterId}:`))
-    .map(([key, text]) => ({
-      verseNumber: Number(key.split(":")[1]),
-      text,
-    }))
-    .filter((verse) =>
-      !normalizedQuery
-        ? true
-        : verse.text.toLowerCase().includes(normalizedQuery),
-    )
-    .sort((a, b) => a.verseNumber - b.verseNumber);
-}

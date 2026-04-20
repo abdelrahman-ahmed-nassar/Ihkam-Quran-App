@@ -1,11 +1,3031 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource/tajawal/400.css";
-@import "@fontsource/tajawal/500.css";
-@import "@fontsource/tajawal/700.css";
-@import "@fontsource/amiri/400.css";
-@import "@fontsource/amiri/700.css";
+
+@font-face {
+  font-family: "QCF2BSML";
+  src: url("/fonts/QUL/QULBSML.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2001";
+  src: url("/fonts/QUL/QUL001.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2002";
+  src: url("/fonts/QUL/QUL002.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2003";
+  src: url("/fonts/QUL/QUL003.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2004";
+  src: url("/fonts/QUL/QUL004.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2005";
+  src: url("/fonts/QUL/QUL005.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2006";
+  src: url("/fonts/QUL/QUL006.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2007";
+  src: url("/fonts/QUL/QUL007.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2008";
+  src: url("/fonts/QUL/QUL008.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2009";
+  src: url("/fonts/QUL/QUL009.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2010";
+  src: url("/fonts/QUL/QUL010.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2011";
+  src: url("/fonts/QUL/QUL011.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2012";
+  src: url("/fonts/QUL/QUL012.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2013";
+  src: url("/fonts/QUL/QUL013.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2014";
+  src: url("/fonts/QUL/QUL014.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2015";
+  src: url("/fonts/QUL/QUL015.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2016";
+  src: url("/fonts/QUL/QUL016.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2017";
+  src: url("/fonts/QUL/QUL017.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2018";
+  src: url("/fonts/QUL/QUL018.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2019";
+  src: url("/fonts/QUL/QUL019.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2020";
+  src: url("/fonts/QUL/QUL020.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2021";
+  src: url("/fonts/QUL/QUL021.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2022";
+  src: url("/fonts/QUL/QUL022.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2023";
+  src: url("/fonts/QUL/QUL023.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2024";
+  src: url("/fonts/QUL/QUL024.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2025";
+  src: url("/fonts/QUL/QUL025.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2026";
+  src: url("/fonts/QUL/QUL026.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2027";
+  src: url("/fonts/QUL/QUL027.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2028";
+  src: url("/fonts/QUL/QUL028.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2029";
+  src: url("/fonts/QUL/QUL029.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2030";
+  src: url("/fonts/QUL/QUL030.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2031";
+  src: url("/fonts/QUL/QUL031.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2032";
+  src: url("/fonts/QUL/QUL032.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2033";
+  src: url("/fonts/QUL/QUL033.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2034";
+  src: url("/fonts/QUL/QUL034.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2035";
+  src: url("/fonts/QUL/QUL035.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2036";
+  src: url("/fonts/QUL/QUL036.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2037";
+  src: url("/fonts/QUL/QUL037.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2038";
+  src: url("/fonts/QUL/QUL038.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2039";
+  src: url("/fonts/QUL/QUL039.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2040";
+  src: url("/fonts/QUL/QUL040.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2041";
+  src: url("/fonts/QUL/QUL041.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2042";
+  src: url("/fonts/QUL/QUL042.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2043";
+  src: url("/fonts/QUL/QUL043.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2044";
+  src: url("/fonts/QUL/QUL044.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2045";
+  src: url("/fonts/QUL/QUL045.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2046";
+  src: url("/fonts/QUL/QUL046.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2047";
+  src: url("/fonts/QUL/QUL047.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2048";
+  src: url("/fonts/QUL/QUL048.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2049";
+  src: url("/fonts/QUL/QUL049.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2050";
+  src: url("/fonts/QUL/QUL050.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2051";
+  src: url("/fonts/QUL/QUL051.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2052";
+  src: url("/fonts/QUL/QUL052.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2053";
+  src: url("/fonts/QUL/QUL053.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2054";
+  src: url("/fonts/QUL/QUL054.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2055";
+  src: url("/fonts/QUL/QUL055.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2056";
+  src: url("/fonts/QUL/QUL056.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2057";
+  src: url("/fonts/QUL/QUL057.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2058";
+  src: url("/fonts/QUL/QUL058.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2059";
+  src: url("/fonts/QUL/QUL059.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2060";
+  src: url("/fonts/QUL/QUL060.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2061";
+  src: url("/fonts/QUL/QUL061.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2062";
+  src: url("/fonts/QUL/QUL062.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2063";
+  src: url("/fonts/QUL/QUL063.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2064";
+  src: url("/fonts/QUL/QUL064.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2065";
+  src: url("/fonts/QUL/QUL065.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2066";
+  src: url("/fonts/QUL/QUL066.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2067";
+  src: url("/fonts/QUL/QUL067.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2068";
+  src: url("/fonts/QUL/QUL068.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2069";
+  src: url("/fonts/QUL/QUL069.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2070";
+  src: url("/fonts/QUL/QUL070.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2071";
+  src: url("/fonts/QUL/QUL071.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2072";
+  src: url("/fonts/QUL/QUL072.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2073";
+  src: url("/fonts/QUL/QUL073.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2074";
+  src: url("/fonts/QUL/QUL074.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2075";
+  src: url("/fonts/QUL/QUL075.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2076";
+  src: url("/fonts/QUL/QUL076.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2077";
+  src: url("/fonts/QUL/QUL077.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2078";
+  src: url("/fonts/QUL/QUL078.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2079";
+  src: url("/fonts/QUL/QUL079.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2080";
+  src: url("/fonts/QUL/QUL080.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2081";
+  src: url("/fonts/QUL/QUL081.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2082";
+  src: url("/fonts/QUL/QUL082.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2083";
+  src: url("/fonts/QUL/QUL083.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2084";
+  src: url("/fonts/QUL/QUL084.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2085";
+  src: url("/fonts/QUL/QUL085.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2086";
+  src: url("/fonts/QUL/QUL086.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2087";
+  src: url("/fonts/QUL/QUL087.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2088";
+  src: url("/fonts/QUL/QUL088.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2089";
+  src: url("/fonts/QUL/QUL089.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2090";
+  src: url("/fonts/QUL/QUL090.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2091";
+  src: url("/fonts/QUL/QUL091.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2092";
+  src: url("/fonts/QUL/QUL092.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2093";
+  src: url("/fonts/QUL/QUL093.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2094";
+  src: url("/fonts/QUL/QUL094.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2095";
+  src: url("/fonts/QUL/QUL095.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2096";
+  src: url("/fonts/QUL/QUL096.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2097";
+  src: url("/fonts/QUL/QUL097.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2098";
+  src: url("/fonts/QUL/QUL098.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2099";
+  src: url("/fonts/QUL/QUL099.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2100";
+  src: url("/fonts/QUL/QUL100.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2101";
+  src: url("/fonts/QUL/QUL101.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2102";
+  src: url("/fonts/QUL/QUL102.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2103";
+  src: url("/fonts/QUL/QUL103.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2104";
+  src: url("/fonts/QUL/QUL104.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2105";
+  src: url("/fonts/QUL/QUL105.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2106";
+  src: url("/fonts/QUL/QUL106.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2107";
+  src: url("/fonts/QUL/QUL107.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2108";
+  src: url("/fonts/QUL/QUL108.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2109";
+  src: url("/fonts/QUL/QUL109.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2110";
+  src: url("/fonts/QUL/QUL110.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2111";
+  src: url("/fonts/QUL/QUL111.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2112";
+  src: url("/fonts/QUL/QUL112.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2113";
+  src: url("/fonts/QUL/QUL113.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2114";
+  src: url("/fonts/QUL/QUL114.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2115";
+  src: url("/fonts/QUL/QUL115.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2116";
+  src: url("/fonts/QUL/QUL116.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2117";
+  src: url("/fonts/QUL/QUL117.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2118";
+  src: url("/fonts/QUL/QUL118.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2119";
+  src: url("/fonts/QUL/QUL119.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2120";
+  src: url("/fonts/QUL/QUL120.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2121";
+  src: url("/fonts/QUL/QUL121.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2122";
+  src: url("/fonts/QUL/QUL122.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2123";
+  src: url("/fonts/QUL/QUL123.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2124";
+  src: url("/fonts/QUL/QUL124.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2125";
+  src: url("/fonts/QUL/QUL125.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2126";
+  src: url("/fonts/QUL/QUL126.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2127";
+  src: url("/fonts/QUL/QUL127.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2128";
+  src: url("/fonts/QUL/QUL128.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2129";
+  src: url("/fonts/QUL/QUL129.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2130";
+  src: url("/fonts/QUL/QUL130.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2131";
+  src: url("/fonts/QUL/QUL131.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2132";
+  src: url("/fonts/QUL/QUL132.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2133";
+  src: url("/fonts/QUL/QUL133.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2134";
+  src: url("/fonts/QUL/QUL134.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2135";
+  src: url("/fonts/QUL/QUL135.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2136";
+  src: url("/fonts/QUL/QUL136.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2137";
+  src: url("/fonts/QUL/QUL137.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2138";
+  src: url("/fonts/QUL/QUL138.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2139";
+  src: url("/fonts/QUL/QUL139.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2140";
+  src: url("/fonts/QUL/QUL140.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2141";
+  src: url("/fonts/QUL/QUL141.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2142";
+  src: url("/fonts/QUL/QUL142.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2143";
+  src: url("/fonts/QUL/QUL143.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2144";
+  src: url("/fonts/QUL/QUL144.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2145";
+  src: url("/fonts/QUL/QUL145.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2146";
+  src: url("/fonts/QUL/QUL146.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2147";
+  src: url("/fonts/QUL/QUL147.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2148";
+  src: url("/fonts/QUL/QUL148.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2149";
+  src: url("/fonts/QUL/QUL149.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2150";
+  src: url("/fonts/QUL/QUL150.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2151";
+  src: url("/fonts/QUL/QUL151.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2152";
+  src: url("/fonts/QUL/QUL152.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2153";
+  src: url("/fonts/QUL/QUL153.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2154";
+  src: url("/fonts/QUL/QUL154.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2155";
+  src: url("/fonts/QUL/QUL155.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2156";
+  src: url("/fonts/QUL/QUL156.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2157";
+  src: url("/fonts/QUL/QUL157.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2158";
+  src: url("/fonts/QUL/QUL158.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2159";
+  src: url("/fonts/QUL/QUL159.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2160";
+  src: url("/fonts/QUL/QUL160.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2161";
+  src: url("/fonts/QUL/QUL161.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2162";
+  src: url("/fonts/QUL/QUL162.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2163";
+  src: url("/fonts/QUL/QUL163.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2164";
+  src: url("/fonts/QUL/QUL164.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2165";
+  src: url("/fonts/QUL/QUL165.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2166";
+  src: url("/fonts/QUL/QUL166.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2167";
+  src: url("/fonts/QUL/QUL167.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2168";
+  src: url("/fonts/QUL/QUL168.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2169";
+  src: url("/fonts/QUL/QUL169.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2170";
+  src: url("/fonts/QUL/QUL170.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2171";
+  src: url("/fonts/QUL/QUL171.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2172";
+  src: url("/fonts/QUL/QUL172.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2173";
+  src: url("/fonts/QUL/QUL173.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2174";
+  src: url("/fonts/QUL/QUL174.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2175";
+  src: url("/fonts/QUL/QUL175.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2176";
+  src: url("/fonts/QUL/QUL176.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2177";
+  src: url("/fonts/QUL/QUL177.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2178";
+  src: url("/fonts/QUL/QUL178.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2179";
+  src: url("/fonts/QUL/QUL179.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2180";
+  src: url("/fonts/QUL/QUL180.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2181";
+  src: url("/fonts/QUL/QUL181.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2182";
+  src: url("/fonts/QUL/QUL182.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2183";
+  src: url("/fonts/QUL/QUL183.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2184";
+  src: url("/fonts/QUL/QUL184.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2185";
+  src: url("/fonts/QUL/QUL185.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2186";
+  src: url("/fonts/QUL/QUL186.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2187";
+  src: url("/fonts/QUL/QUL187.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2188";
+  src: url("/fonts/QUL/QUL188.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2189";
+  src: url("/fonts/QUL/QUL189.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2190";
+  src: url("/fonts/QUL/QUL190.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2191";
+  src: url("/fonts/QUL/QUL191.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2192";
+  src: url("/fonts/QUL/QUL192.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2193";
+  src: url("/fonts/QUL/QUL193.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2194";
+  src: url("/fonts/QUL/QUL194.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2195";
+  src: url("/fonts/QUL/QUL195.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2196";
+  src: url("/fonts/QUL/QUL196.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2197";
+  src: url("/fonts/QUL/QUL197.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2198";
+  src: url("/fonts/QUL/QUL198.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2199";
+  src: url("/fonts/QUL/QUL199.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2200";
+  src: url("/fonts/QUL/QUL200.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2201";
+  src: url("/fonts/QUL/QUL201.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2202";
+  src: url("/fonts/QUL/QUL202.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2203";
+  src: url("/fonts/QUL/QUL203.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2204";
+  src: url("/fonts/QUL/QUL204.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2205";
+  src: url("/fonts/QUL/QUL205.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2206";
+  src: url("/fonts/QUL/QUL206.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2207";
+  src: url("/fonts/QUL/QUL207.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2208";
+  src: url("/fonts/QUL/QUL208.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2209";
+  src: url("/fonts/QUL/QUL209.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2210";
+  src: url("/fonts/QUL/QUL210.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2211";
+  src: url("/fonts/QUL/QUL211.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2212";
+  src: url("/fonts/QUL/QUL212.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2213";
+  src: url("/fonts/QUL/QUL213.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2214";
+  src: url("/fonts/QUL/QUL214.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2215";
+  src: url("/fonts/QUL/QUL215.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2216";
+  src: url("/fonts/QUL/QUL216.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2217";
+  src: url("/fonts/QUL/QUL217.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2218";
+  src: url("/fonts/QUL/QUL218.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2219";
+  src: url("/fonts/QUL/QUL219.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2220";
+  src: url("/fonts/QUL/QUL220.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2221";
+  src: url("/fonts/QUL/QUL221.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2222";
+  src: url("/fonts/QUL/QUL222.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2223";
+  src: url("/fonts/QUL/QUL223.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2224";
+  src: url("/fonts/QUL/QUL224.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2225";
+  src: url("/fonts/QUL/QUL225.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2226";
+  src: url("/fonts/QUL/QUL226.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2227";
+  src: url("/fonts/QUL/QUL227.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2228";
+  src: url("/fonts/QUL/QUL228.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2229";
+  src: url("/fonts/QUL/QUL229.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2230";
+  src: url("/fonts/QUL/QUL230.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2231";
+  src: url("/fonts/QUL/QUL231.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2232";
+  src: url("/fonts/QUL/QUL232.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2233";
+  src: url("/fonts/QUL/QUL233.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2234";
+  src: url("/fonts/QUL/QUL234.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2235";
+  src: url("/fonts/QUL/QUL235.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2236";
+  src: url("/fonts/QUL/QUL236.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2237";
+  src: url("/fonts/QUL/QUL237.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2238";
+  src: url("/fonts/QUL/QUL238.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2239";
+  src: url("/fonts/QUL/QUL239.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2240";
+  src: url("/fonts/QUL/QUL240.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2241";
+  src: url("/fonts/QUL/QUL241.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2242";
+  src: url("/fonts/QUL/QUL242.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2243";
+  src: url("/fonts/QUL/QUL243.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2244";
+  src: url("/fonts/QUL/QUL244.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2245";
+  src: url("/fonts/QUL/QUL245.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2246";
+  src: url("/fonts/QUL/QUL246.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2247";
+  src: url("/fonts/QUL/QUL247.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2248";
+  src: url("/fonts/QUL/QUL248.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2249";
+  src: url("/fonts/QUL/QUL249.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2250";
+  src: url("/fonts/QUL/QUL250.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2251";
+  src: url("/fonts/QUL/QUL251.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2252";
+  src: url("/fonts/QUL/QUL252.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2253";
+  src: url("/fonts/QUL/QUL253.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2254";
+  src: url("/fonts/QUL/QUL254.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2255";
+  src: url("/fonts/QUL/QUL255.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2256";
+  src: url("/fonts/QUL/QUL256.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2257";
+  src: url("/fonts/QUL/QUL257.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2258";
+  src: url("/fonts/QUL/QUL258.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2259";
+  src: url("/fonts/QUL/QUL259.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2260";
+  src: url("/fonts/QUL/QUL260.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2261";
+  src: url("/fonts/QUL/QUL261.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2262";
+  src: url("/fonts/QUL/QUL262.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2263";
+  src: url("/fonts/QUL/QUL263.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2264";
+  src: url("/fonts/QUL/QUL264.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2265";
+  src: url("/fonts/QUL/QUL265.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2266";
+  src: url("/fonts/QUL/QUL266.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2267";
+  src: url("/fonts/QUL/QUL267.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2268";
+  src: url("/fonts/QUL/QUL268.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2269";
+  src: url("/fonts/QUL/QUL269.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2270";
+  src: url("/fonts/QUL/QUL270.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2271";
+  src: url("/fonts/QUL/QUL271.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2272";
+  src: url("/fonts/QUL/QUL272.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2273";
+  src: url("/fonts/QUL/QUL273.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2274";
+  src: url("/fonts/QUL/QUL274.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2275";
+  src: url("/fonts/QUL/QUL275.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2276";
+  src: url("/fonts/QUL/QUL276.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2277";
+  src: url("/fonts/QUL/QUL277.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2278";
+  src: url("/fonts/QUL/QUL278.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2279";
+  src: url("/fonts/QUL/QUL279.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2280";
+  src: url("/fonts/QUL/QUL280.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2281";
+  src: url("/fonts/QUL/QUL281.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2282";
+  src: url("/fonts/QUL/QUL282.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2283";
+  src: url("/fonts/QUL/QUL283.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2284";
+  src: url("/fonts/QUL/QUL284.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2285";
+  src: url("/fonts/QUL/QUL285.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2286";
+  src: url("/fonts/QUL/QUL286.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2287";
+  src: url("/fonts/QUL/QUL287.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2288";
+  src: url("/fonts/QUL/QUL288.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2289";
+  src: url("/fonts/QUL/QUL289.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2290";
+  src: url("/fonts/QUL/QUL290.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2291";
+  src: url("/fonts/QUL/QUL291.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2292";
+  src: url("/fonts/QUL/QUL292.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2293";
+  src: url("/fonts/QUL/QUL293.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2294";
+  src: url("/fonts/QUL/QUL294.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2295";
+  src: url("/fonts/QUL/QUL295.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2296";
+  src: url("/fonts/QUL/QUL296.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2297";
+  src: url("/fonts/QUL/QUL297.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2298";
+  src: url("/fonts/QUL/QUL298.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2299";
+  src: url("/fonts/QUL/QUL299.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2300";
+  src: url("/fonts/QUL/QUL300.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2301";
+  src: url("/fonts/QUL/QUL301.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2302";
+  src: url("/fonts/QUL/QUL302.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2303";
+  src: url("/fonts/QUL/QUL303.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2304";
+  src: url("/fonts/QUL/QUL304.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2305";
+  src: url("/fonts/QUL/QUL305.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2306";
+  src: url("/fonts/QUL/QUL306.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2307";
+  src: url("/fonts/QUL/QUL307.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2308";
+  src: url("/fonts/QUL/QUL308.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2309";
+  src: url("/fonts/QUL/QUL309.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2310";
+  src: url("/fonts/QUL/QUL310.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2311";
+  src: url("/fonts/QUL/QUL311.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2312";
+  src: url("/fonts/QUL/QUL312.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2313";
+  src: url("/fonts/QUL/QUL313.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2314";
+  src: url("/fonts/QUL/QUL314.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2315";
+  src: url("/fonts/QUL/QUL315.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2316";
+  src: url("/fonts/QUL/QUL316.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2317";
+  src: url("/fonts/QUL/QUL317.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2318";
+  src: url("/fonts/QUL/QUL318.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2319";
+  src: url("/fonts/QUL/QUL319.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2320";
+  src: url("/fonts/QUL/QUL320.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2321";
+  src: url("/fonts/QUL/QUL321.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2322";
+  src: url("/fonts/QUL/QUL322.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2323";
+  src: url("/fonts/QUL/QUL323.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2324";
+  src: url("/fonts/QUL/QUL324.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2325";
+  src: url("/fonts/QUL/QUL325.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2326";
+  src: url("/fonts/QUL/QUL326.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2327";
+  src: url("/fonts/QUL/QUL327.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2328";
+  src: url("/fonts/QUL/QUL328.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2329";
+  src: url("/fonts/QUL/QUL329.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2330";
+  src: url("/fonts/QUL/QUL330.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2331";
+  src: url("/fonts/QUL/QUL331.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2332";
+  src: url("/fonts/QUL/QUL332.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2333";
+  src: url("/fonts/QUL/QUL333.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2334";
+  src: url("/fonts/QUL/QUL334.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2335";
+  src: url("/fonts/QUL/QUL335.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2336";
+  src: url("/fonts/QUL/QUL336.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2337";
+  src: url("/fonts/QUL/QUL337.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2338";
+  src: url("/fonts/QUL/QUL338.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2339";
+  src: url("/fonts/QUL/QUL339.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2340";
+  src: url("/fonts/QUL/QUL340.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2341";
+  src: url("/fonts/QUL/QUL341.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2342";
+  src: url("/fonts/QUL/QUL342.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2343";
+  src: url("/fonts/QUL/QUL343.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2344";
+  src: url("/fonts/QUL/QUL344.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2345";
+  src: url("/fonts/QUL/QUL345.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2346";
+  src: url("/fonts/QUL/QUL346.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2347";
+  src: url("/fonts/QUL/QUL347.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2348";
+  src: url("/fonts/QUL/QUL348.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2349";
+  src: url("/fonts/QUL/QUL349.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2350";
+  src: url("/fonts/QUL/QUL350.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2351";
+  src: url("/fonts/QUL/QUL351.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2352";
+  src: url("/fonts/QUL/QUL352.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2353";
+  src: url("/fonts/QUL/QUL353.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2354";
+  src: url("/fonts/QUL/QUL354.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2355";
+  src: url("/fonts/QUL/QUL355.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2356";
+  src: url("/fonts/QUL/QUL356.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2357";
+  src: url("/fonts/QUL/QUL357.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2358";
+  src: url("/fonts/QUL/QUL358.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2359";
+  src: url("/fonts/QUL/QUL359.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2360";
+  src: url("/fonts/QUL/QUL360.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2361";
+  src: url("/fonts/QUL/QUL361.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2362";
+  src: url("/fonts/QUL/QUL362.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2363";
+  src: url("/fonts/QUL/QUL363.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2364";
+  src: url("/fonts/QUL/QUL364.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2365";
+  src: url("/fonts/QUL/QUL365.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2366";
+  src: url("/fonts/QUL/QUL366.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2367";
+  src: url("/fonts/QUL/QUL367.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2368";
+  src: url("/fonts/QUL/QUL368.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2369";
+  src: url("/fonts/QUL/QUL369.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2370";
+  src: url("/fonts/QUL/QUL370.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2371";
+  src: url("/fonts/QUL/QUL371.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2372";
+  src: url("/fonts/QUL/QUL372.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2373";
+  src: url("/fonts/QUL/QUL373.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2374";
+  src: url("/fonts/QUL/QUL374.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2375";
+  src: url("/fonts/QUL/QUL375.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2376";
+  src: url("/fonts/QUL/QUL376.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2377";
+  src: url("/fonts/QUL/QUL377.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2378";
+  src: url("/fonts/QUL/QUL378.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2379";
+  src: url("/fonts/QUL/QUL379.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2380";
+  src: url("/fonts/QUL/QUL380.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2381";
+  src: url("/fonts/QUL/QUL381.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2382";
+  src: url("/fonts/QUL/QUL382.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2383";
+  src: url("/fonts/QUL/QUL383.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2384";
+  src: url("/fonts/QUL/QUL384.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2385";
+  src: url("/fonts/QUL/QUL385.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2386";
+  src: url("/fonts/QUL/QUL386.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2387";
+  src: url("/fonts/QUL/QUL387.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2388";
+  src: url("/fonts/QUL/QUL388.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2389";
+  src: url("/fonts/QUL/QUL389.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2390";
+  src: url("/fonts/QUL/QUL390.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2391";
+  src: url("/fonts/QUL/QUL391.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2392";
+  src: url("/fonts/QUL/QUL392.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2393";
+  src: url("/fonts/QUL/QUL393.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2394";
+  src: url("/fonts/QUL/QUL394.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2395";
+  src: url("/fonts/QUL/QUL395.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2396";
+  src: url("/fonts/QUL/QUL396.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2397";
+  src: url("/fonts/QUL/QUL397.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2398";
+  src: url("/fonts/QUL/QUL398.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2399";
+  src: url("/fonts/QUL/QUL399.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2400";
+  src: url("/fonts/QUL/QUL400.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2401";
+  src: url("/fonts/QUL/QUL401.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2402";
+  src: url("/fonts/QUL/QUL402.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2403";
+  src: url("/fonts/QUL/QUL403.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2404";
+  src: url("/fonts/QUL/QUL404.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2405";
+  src: url("/fonts/QUL/QUL405.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2406";
+  src: url("/fonts/QUL/QUL406.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2407";
+  src: url("/fonts/QUL/QUL407.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2408";
+  src: url("/fonts/QUL/QUL408.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2409";
+  src: url("/fonts/QUL/QUL409.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2410";
+  src: url("/fonts/QUL/QUL410.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2411";
+  src: url("/fonts/QUL/QUL411.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2412";
+  src: url("/fonts/QUL/QUL412.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2413";
+  src: url("/fonts/QUL/QUL413.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2414";
+  src: url("/fonts/QUL/QUL414.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2415";
+  src: url("/fonts/QUL/QUL415.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2416";
+  src: url("/fonts/QUL/QUL416.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2417";
+  src: url("/fonts/QUL/QUL417.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2418";
+  src: url("/fonts/QUL/QUL418.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2419";
+  src: url("/fonts/QUL/QUL419.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2420";
+  src: url("/fonts/QUL/QUL420.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2421";
+  src: url("/fonts/QUL/QUL421.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2422";
+  src: url("/fonts/QUL/QUL422.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2423";
+  src: url("/fonts/QUL/QUL423.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2424";
+  src: url("/fonts/QUL/QUL424.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2425";
+  src: url("/fonts/QUL/QUL425.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2426";
+  src: url("/fonts/QUL/QUL426.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2427";
+  src: url("/fonts/QUL/QUL427.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2428";
+  src: url("/fonts/QUL/QUL428.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2429";
+  src: url("/fonts/QUL/QUL429.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2430";
+  src: url("/fonts/QUL/QUL430.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2431";
+  src: url("/fonts/QUL/QUL431.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2432";
+  src: url("/fonts/QUL/QUL432.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2433";
+  src: url("/fonts/QUL/QUL433.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2434";
+  src: url("/fonts/QUL/QUL434.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2435";
+  src: url("/fonts/QUL/QUL435.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2436";
+  src: url("/fonts/QUL/QUL436.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2437";
+  src: url("/fonts/QUL/QUL437.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2438";
+  src: url("/fonts/QUL/QUL438.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2439";
+  src: url("/fonts/QUL/QUL439.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2440";
+  src: url("/fonts/QUL/QUL440.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2441";
+  src: url("/fonts/QUL/QUL441.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2442";
+  src: url("/fonts/QUL/QUL442.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2443";
+  src: url("/fonts/QUL/QUL443.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2444";
+  src: url("/fonts/QUL/QUL444.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2445";
+  src: url("/fonts/QUL/QUL445.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2446";
+  src: url("/fonts/QUL/QUL446.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2447";
+  src: url("/fonts/QUL/QUL447.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2448";
+  src: url("/fonts/QUL/QUL448.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2449";
+  src: url("/fonts/QUL/QUL449.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2450";
+  src: url("/fonts/QUL/QUL450.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2451";
+  src: url("/fonts/QUL/QUL451.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2452";
+  src: url("/fonts/QUL/QUL452.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2453";
+  src: url("/fonts/QUL/QUL453.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2454";
+  src: url("/fonts/QUL/QUL454.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2455";
+  src: url("/fonts/QUL/QUL455.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2456";
+  src: url("/fonts/QUL/QUL456.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2457";
+  src: url("/fonts/QUL/QUL457.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2458";
+  src: url("/fonts/QUL/QUL458.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2459";
+  src: url("/fonts/QUL/QUL459.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2460";
+  src: url("/fonts/QUL/QUL460.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2461";
+  src: url("/fonts/QUL/QUL461.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2462";
+  src: url("/fonts/QUL/QUL462.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2463";
+  src: url("/fonts/QUL/QUL463.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2464";
+  src: url("/fonts/QUL/QUL464.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2465";
+  src: url("/fonts/QUL/QUL465.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2466";
+  src: url("/fonts/QUL/QUL466.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2467";
+  src: url("/fonts/QUL/QUL467.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2468";
+  src: url("/fonts/QUL/QUL468.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2469";
+  src: url("/fonts/QUL/QUL469.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2470";
+  src: url("/fonts/QUL/QUL470.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2471";
+  src: url("/fonts/QUL/QUL471.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2472";
+  src: url("/fonts/QUL/QUL472.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2473";
+  src: url("/fonts/QUL/QUL473.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2474";
+  src: url("/fonts/QUL/QUL474.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2475";
+  src: url("/fonts/QUL/QUL475.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2476";
+  src: url("/fonts/QUL/QUL476.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2477";
+  src: url("/fonts/QUL/QUL477.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2478";
+  src: url("/fonts/QUL/QUL478.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2479";
+  src: url("/fonts/QUL/QUL479.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2480";
+  src: url("/fonts/QUL/QUL480.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2481";
+  src: url("/fonts/QUL/QUL481.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2482";
+  src: url("/fonts/QUL/QUL482.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2483";
+  src: url("/fonts/QUL/QUL483.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2484";
+  src: url("/fonts/QUL/QUL484.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2485";
+  src: url("/fonts/QUL/QUL485.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2486";
+  src: url("/fonts/QUL/QUL486.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2487";
+  src: url("/fonts/QUL/QUL487.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2488";
+  src: url("/fonts/QUL/QUL488.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2489";
+  src: url("/fonts/QUL/QUL489.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2490";
+  src: url("/fonts/QUL/QUL490.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2491";
+  src: url("/fonts/QUL/QUL491.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2492";
+  src: url("/fonts/QUL/QUL492.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2493";
+  src: url("/fonts/QUL/QUL493.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2494";
+  src: url("/fonts/QUL/QUL494.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2495";
+  src: url("/fonts/QUL/QUL495.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2496";
+  src: url("/fonts/QUL/QUL496.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2497";
+  src: url("/fonts/QUL/QUL497.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2498";
+  src: url("/fonts/QUL/QUL498.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2499";
+  src: url("/fonts/QUL/QUL499.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2500";
+  src: url("/fonts/QUL/QUL500.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2501";
+  src: url("/fonts/QUL/QUL501.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2502";
+  src: url("/fonts/QUL/QUL502.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2503";
+  src: url("/fonts/QUL/QUL503.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2504";
+  src: url("/fonts/QUL/QUL504.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2505";
+  src: url("/fonts/QUL/QUL505.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2506";
+  src: url("/fonts/QUL/QUL506.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2507";
+  src: url("/fonts/QUL/QUL507.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2508";
+  src: url("/fonts/QUL/QUL508.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2509";
+  src: url("/fonts/QUL/QUL509.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2510";
+  src: url("/fonts/QUL/QUL510.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2511";
+  src: url("/fonts/QUL/QUL511.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2512";
+  src: url("/fonts/QUL/QUL512.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2513";
+  src: url("/fonts/QUL/QUL513.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2514";
+  src: url("/fonts/QUL/QUL514.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2515";
+  src: url("/fonts/QUL/QUL515.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2516";
+  src: url("/fonts/QUL/QUL516.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2517";
+  src: url("/fonts/QUL/QUL517.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2518";
+  src: url("/fonts/QUL/QUL518.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2519";
+  src: url("/fonts/QUL/QUL519.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2520";
+  src: url("/fonts/QUL/QUL520.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2521";
+  src: url("/fonts/QUL/QUL521.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2522";
+  src: url("/fonts/QUL/QUL522.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2523";
+  src: url("/fonts/QUL/QUL523.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2524";
+  src: url("/fonts/QUL/QUL524.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2525";
+  src: url("/fonts/QUL/QUL525.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2526";
+  src: url("/fonts/QUL/QUL526.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2527";
+  src: url("/fonts/QUL/QUL527.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2528";
+  src: url("/fonts/QUL/QUL528.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2529";
+  src: url("/fonts/QUL/QUL529.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2530";
+  src: url("/fonts/QUL/QUL530.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2531";
+  src: url("/fonts/QUL/QUL531.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2532";
+  src: url("/fonts/QUL/QUL532.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2533";
+  src: url("/fonts/QUL/QUL533.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2534";
+  src: url("/fonts/QUL/QUL534.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2535";
+  src: url("/fonts/QUL/QUL535.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2536";
+  src: url("/fonts/QUL/QUL536.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2537";
+  src: url("/fonts/QUL/QUL537.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2538";
+  src: url("/fonts/QUL/QUL538.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2539";
+  src: url("/fonts/QUL/QUL539.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2540";
+  src: url("/fonts/QUL/QUL540.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2541";
+  src: url("/fonts/QUL/QUL541.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2542";
+  src: url("/fonts/QUL/QUL542.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2543";
+  src: url("/fonts/QUL/QUL543.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2544";
+  src: url("/fonts/QUL/QUL544.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2545";
+  src: url("/fonts/QUL/QUL545.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2546";
+  src: url("/fonts/QUL/QUL546.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2547";
+  src: url("/fonts/QUL/QUL547.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2548";
+  src: url("/fonts/QUL/QUL548.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2549";
+  src: url("/fonts/QUL/QUL549.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2550";
+  src: url("/fonts/QUL/QUL550.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2551";
+  src: url("/fonts/QUL/QUL551.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2552";
+  src: url("/fonts/QUL/QUL552.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2553";
+  src: url("/fonts/QUL/QUL553.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2554";
+  src: url("/fonts/QUL/QUL554.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2555";
+  src: url("/fonts/QUL/QUL555.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2556";
+  src: url("/fonts/QUL/QUL556.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2557";
+  src: url("/fonts/QUL/QUL557.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2558";
+  src: url("/fonts/QUL/QUL558.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2559";
+  src: url("/fonts/QUL/QUL559.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2560";
+  src: url("/fonts/QUL/QUL560.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2561";
+  src: url("/fonts/QUL/QUL561.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2562";
+  src: url("/fonts/QUL/QUL562.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2563";
+  src: url("/fonts/QUL/QUL563.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2564";
+  src: url("/fonts/QUL/QUL564.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2565";
+  src: url("/fonts/QUL/QUL565.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2566";
+  src: url("/fonts/QUL/QUL566.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2567";
+  src: url("/fonts/QUL/QUL567.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2568";
+  src: url("/fonts/QUL/QUL568.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2569";
+  src: url("/fonts/QUL/QUL569.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2570";
+  src: url("/fonts/QUL/QUL570.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2571";
+  src: url("/fonts/QUL/QUL571.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2572";
+  src: url("/fonts/QUL/QUL572.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2573";
+  src: url("/fonts/QUL/QUL573.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2574";
+  src: url("/fonts/QUL/QUL574.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2575";
+  src: url("/fonts/QUL/QUL575.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2576";
+  src: url("/fonts/QUL/QUL576.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2577";
+  src: url("/fonts/QUL/QUL577.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2578";
+  src: url("/fonts/QUL/QUL578.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2579";
+  src: url("/fonts/QUL/QUL579.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2580";
+  src: url("/fonts/QUL/QUL580.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2581";
+  src: url("/fonts/QUL/QUL581.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2582";
+  src: url("/fonts/QUL/QUL582.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2583";
+  src: url("/fonts/QUL/QUL583.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2584";
+  src: url("/fonts/QUL/QUL584.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2585";
+  src: url("/fonts/QUL/QUL585.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2586";
+  src: url("/fonts/QUL/QUL586.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2587";
+  src: url("/fonts/QUL/QUL587.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2588";
+  src: url("/fonts/QUL/QUL588.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2589";
+  src: url("/fonts/QUL/QUL589.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2590";
+  src: url("/fonts/QUL/QUL590.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2591";
+  src: url("/fonts/QUL/QUL591.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2592";
+  src: url("/fonts/QUL/QUL592.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2593";
+  src: url("/fonts/QUL/QUL593.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2594";
+  src: url("/fonts/QUL/QUL594.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2595";
+  src: url("/fonts/QUL/QUL595.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2596";
+  src: url("/fonts/QUL/QUL596.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2597";
+  src: url("/fonts/QUL/QUL597.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2598";
+  src: url("/fonts/QUL/QUL598.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2599";
+  src: url("/fonts/QUL/QUL599.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2600";
+  src: url("/fonts/QUL/QUL600.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2601";
+  src: url("/fonts/QUL/QUL601.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2602";
+  src: url("/fonts/QUL/QUL602.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2603";
+  src: url("/fonts/QUL/QUL603.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "QCF2604";
+  src: url("/fonts/QUL/QUL604.ttf") format("truetype");
+}
 
 :root {
   --primary-color: #1b5e20;
@@ -22,8 +3042,8 @@
 }
 
 @theme {
-  --font-sans: "Tajawal", "Noto Sans Arabic", sans-serif;
-  --font-serif: "Amiri", "Noto Naskh Arabic", serif;
+  --font-sans: sans-serif;
+  --font-serif: serif;
 
   --color-brand: #1b5e20;
   --color-brand-soft: #4c8c4a;
@@ -37,24 +3057,6 @@
 @layer components {
   .page-shell {
     @apply flex flex-col gap-4;
-  }
-
-  .page-header {
-    @apply sticky top-0 z-10 mb-1 flex items-center justify-between gap-2.5 rounded-2xl bg-white p-4;
-    box-shadow: var(--elevation-soft);
-  }
-
-  .page-title {
-    @apply text-xl font-bold text-text-main;
-  }
-
-  .brand-outline-button {
-    @apply border-brand text-brand;
-  }
-
-  .card-panel {
-    @apply rounded-2xl bg-white;
-    box-shadow: var(--elevation-soft);
   }
 
   .chapter-search-shell {
@@ -77,27 +3079,6 @@
 
   .chapter-meta {
     @apply text-[0.85rem] text-text-muted;
-  }
-
-  .bismillah {
-    @apply mb-1 text-center font-serif text-[1.8rem] text-brand;
-  }
-
-  .quran-reading-panel {
-    @apply rounded-2xl bg-white p-7.5 text-justify font-serif text-[1.6rem] leading-[2.8] [text-justify:inter-word];
-    box-shadow: var(--elevation-soft);
-  }
-
-  .verse-inline {
-    @apply cursor-pointer rounded px-1.25 transition-colors;
-  }
-
-  .verse-inline:hover {
-    background-color: var(--verse-hover-bg);
-  }
-
-  .verse-marker {
-    @apply mx-2 whitespace-nowrap text-[1.1rem] text-accent;
   }
 }
 
@@ -135,4 +3116,33 @@ h3,
 h4 {
   margin: 0;
   font-weight: 700;
+}
+
+.page {
+  direction: rtl;
+  text-align: right;
+  font-family: "Amiri", serif;
+  line-height: 2.2;
+  font-size: 24px;
+}
+
+.surah-header {
+  text-align: center;
+  font-weight: bold;
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.basmala {
+  text-align: center;
+  font-size: 26px;
+}
+
+.word {
+  display: inline;
+}
+
+.line {
+  display: block;
+  white-space: nowrap;
 }

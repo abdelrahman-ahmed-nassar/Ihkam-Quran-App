@@ -14,13 +14,20 @@ db.version(1).stores({
 
 export const quranTable = db.table<QuranRecord, string>("quran");
 
+async function ensureDbOpen() {
+  if (!db.isOpen()) {
+    await db.open();
+  }
+}
+
 export async function initQuranData() {
+  await ensureDbOpen();
   const existing = await quranTable.get("quran");
   if (existing) {
     return existing.data;
   }
 
-  const url = new URL("./assets/quran.json", import.meta.url);
+  const url = new URL("/quran.json", import.meta.url);
   const response = await fetch(url.toString());
   if (!response.ok) {
     throw new Error("Unable to load quran.json");
@@ -32,6 +39,12 @@ export async function initQuranData() {
 }
 
 export async function getQuranData() {
+  await ensureDbOpen();
   const record = await quranTable.get("quran");
   return record?.data ?? null;
+}
+
+export async function dropCurrentDb() {
+  await db.delete();
+  await db.open();
 }

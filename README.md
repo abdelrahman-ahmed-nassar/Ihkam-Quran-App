@@ -36,3 +36,9 @@ This project is configured for GitHub Pages on this repository:
 After the workflow succeeds, the site will be available at:
 
 - `https://abdelrahman-ahmed-nassar.github.io/Ihkam-Quran-App/`
+
+
+used resources
+https://qul.tarteel.ai/resources/quran-script/61
+https://qul.tarteel.ai/resources/font/249
+https://qul.tarteel.ai/resources/mushaf-layout/10
