@@ -31,6 +31,10 @@ function getQpcFontName(page: number) {
   return `QCF${String(page).padStart(3, "0")}`;
 }
 
+function getQpcFontStack(page: number) {
+  return `${getQpcFontName(page)}, UthmanicHafs, Tahoma, Arial, sans-serif`;
+}
+
 function getPageFontPath(page: number) {
   return `${import.meta.env.BASE_URL}fonts/QUL/QUL${formatPageId(page)}.ttf`;
 }
@@ -300,7 +304,7 @@ const ReadPage = () => {
           <div
             className={`w-full p-2 text-[clamp(1.15rem,6.3vw,2rem)] leading-[1.75] text-right [text-align-last:justify] [unicode-bidi:embed] sm:p-3 sm:text-4xl sm:leading-[2.05] md:p-8 md:text-6xl ${isDraggingPage ? "" : "transition-transform duration-200 ease-out"}`}
             style={{
-              fontFamily: getQpcFontName(currentPage),
+              fontFamily: getQpcFontStack(currentPage),
               transform: `translateX(${pageOffset}px)`,
               opacity: pageOpacity,
             }}
@@ -314,7 +318,7 @@ const ReadPage = () => {
                     key={lineKey}
                     className="mb-2 whitespace-nowrap text-center font-bold [text-align-last:center]"
                     style={{
-                      fontFamily: getQpcFontName(currentPage),
+                      fontFamily: getQpcFontStack(currentPage),
                     }}
                   >
                     سورة {line.surah_number}
@@ -328,7 +332,8 @@ const ReadPage = () => {
                     key={lineKey}
                     className="mb-2 flex items-center justify-center whitespace-nowrap [text-align-last:center]"
                     style={{
-                      fontFamily: "QCFBSML",
+                      fontFamily:
+                        "QCFBSML, UthmanicHafs, Tahoma, Arial, sans-serif",
                     }}
                   >
                     ﷽
