@@ -50,6 +50,10 @@ function getTopBannerPath() {
   return `${import.meta.env.BASE_URL}images/top.png`;
 }
 
+function getBismalahPath() {
+  return `${import.meta.env.BASE_URL}images/bismalah.svg`;
+}
+
 type ReadPageProps = {
   initialPage: number;
   onBackToIndex: () => void;
@@ -413,13 +417,14 @@ const ReadPage = ({
                 return (
                   <div
                     key={lineKey}
-                    className="flex w-full items-center justify-center overflow-hidden whitespace-nowrap text-[#6b3200] [text-align-last:center]"
-                    style={{
-                      fontFamily:
-                        "QCFBSML, UthmanicHafs, Tahoma, Arial, sans-serif",
-                    }}
+                    className="flex w-full items-center justify-center overflow-hidden whitespace-nowrap [text-align-last:center]"
                   >
-                    ﷽
+                    <img
+                      src={getBismalahPath()}
+                      alt="بسم الله الرحمن الرحيم"
+                      className="my-2 h-[1.5em] w-auto"
+                      draggable={false}
+                    />
                   </div>
                 );
               }
