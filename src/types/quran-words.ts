@@ -12,7 +12,9 @@ export interface Word {
 
   location: LocationKey;
 
-  text: string; // glyph (QPC font char)
+  textGlyph: string; // glyph (QPC font char)
+
+  textUnicode: string; // unicode Arabic text
 
 }
 

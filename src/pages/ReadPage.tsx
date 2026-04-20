@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import type { Word, WordsMap } from "@/types/quran-words";
@@ -140,13 +140,16 @@ const ReadPage = () => {
     return wordsArray.slice(first - 1, last);
   };
 
-  const goToPage = (page: number, direction?: "next" | "prev") => {
-    const nextPage = clampPage(page);
-    if (nextPage === currentPage) return;
+  const goToPage = useCallback(
+    (page: number, direction?: "next" | "prev") => {
+      const nextPage = clampPage(page);
+      if (nextPage === currentPage) return;
 
-    setTurnDirection(direction ?? (nextPage > currentPage ? "next" : "prev"));
-    navigate(`/${formatPageId(nextPage)}`);
-  };
+      setTurnDirection(direction ?? (nextPage > currentPage ? "next" : "prev"));
+      navigate(`/${formatPageId(nextPage)}`);
+    },
+    [currentPage, navigate],
+  );
 
   useEffect(() => {
     if (!turnDirection) return;
@@ -188,7 +191,7 @@ const ReadPage = () => {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [currentPage]);
+  }, [currentPage, goToPage]);
 
   const onTouchStart = (event: React.TouchEvent<HTMLElement>) => {
     const point = event.touches[0];
@@ -310,7 +313,9 @@ const ReadPage = () => {
                   <div
                     key={lineKey}
                     className="mb-2 whitespace-nowrap text-center font-bold [text-align-last:center]"
-                    style={{ fontFamily: getQpcFontName(currentPage) }}
+                    style={{
+                      fontFamily: getQpcFontName(currentPage),
+                    }}
                   >
                     سورة {line.surah_number}
                   </div>
@@ -322,7 +327,9 @@ const ReadPage = () => {
                   <div
                     key={lineKey}
                     className="mb-2 flex items-center justify-center whitespace-nowrap [text-align-last:center]"
-                    style={{ fontFamily: "QCF2BSML" }}
+                    style={{
+                      fontFamily: "QCF2BSML",
+                    }}
                   >
                     ﷽
                   </div>
@@ -354,7 +361,7 @@ const ReadPage = () => {
                         className="inline-block align-baseline text-[clamp(1.15rem,6.3vw,2rem)] sm:text-4xl md:text-6xl"
                         data-location={word.location}
                       >
-                        {word.text}
+                        {word.textGlyph}
                       </span>
                     ))}
                   </div>
