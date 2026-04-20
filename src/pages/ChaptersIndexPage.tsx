@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
-import { useNavigate } from "react-router-dom";
 import { quranChaptersTable } from "../db";
 import { InstallPWAButton } from "../components/install-pwa-button";
 import { UpdateQuranDataButton } from "../components/update-quran-data-button";
@@ -10,15 +9,16 @@ type ChaptersIndexPageProps = {
   loading: boolean;
   error: string | null;
   onRefreshQuranData: () => Promise<void>;
+  onSelectPage: (page: number) => void;
 };
 
 const ChaptersIndexPage = ({
   loading,
   error,
   onRefreshQuranData,
+  onSelectPage,
 }: ChaptersIndexPageProps) => {
   const [surahSearch, setSurahSearch] = useState("");
-  const navigate = useNavigate();
   const quranChaptersRecord = useLiveQuery(() =>
     quranChaptersTable.get("quranChapters"),
   );
@@ -71,7 +71,7 @@ const ChaptersIndexPage = ({
                 key={chapter.id}
                 type="button"
                 className="chapter-card"
-                onClick={() => navigate(`/${chapter.startPage}`)}
+                onClick={() => onSelectPage(chapter.startPage)}
               >
                 <span className="chapter-index-pill">{chapter.id}</span>
                 <span className="flex flex-1 flex-col">

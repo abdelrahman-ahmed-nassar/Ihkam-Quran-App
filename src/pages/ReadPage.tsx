@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { House } from "lucide-react";
 import { getChapterById } from "@/lib/quran";
 
@@ -26,11 +25,6 @@ const clampPage = (page: number) =>
 
 const formatPageId = (page: number) => page.toString().padStart(3, "0");
 
-const parseRoutePage = (value?: string) => {
-  const parsed = Number.parseInt(value ?? "", 10);
-  return Number.isNaN(parsed) ? MIN_PAGE : clampPage(parsed);
-};
-
 function getQpcFontName(page: number) {
   return `QCF${String(page).padStart(3, "0")}`;
 }
@@ -43,11 +37,13 @@ function getPageFontPath(page: number) {
   return `${import.meta.env.BASE_URL}fonts/QUL/QUL${formatPageId(page)}.woff2`;
 }
 
-const ReadPage = () => {
-  const { pageId } = useParams();
-  const navigate = useNavigate();
+type ReadPageProps = {
+  initialPage: number;
+  onBackToIndex: () => void;
+};
 
-  const currentPage = parseRoutePage(pageId);
+const ReadPage = ({ initialPage, onBackToIndex }: ReadPageProps) => {
+  const [currentPage, setCurrentPage] = useState(() => clampPage(initialPage));
   const normalizedPageId = formatPageId(currentPage);
 
   const [wordsMap, setWordsMap] = useState<WordsMap | null>(null);
@@ -67,12 +63,9 @@ const ReadPage = () => {
     null,
   );
 
-  // Redirect invalid route
   useEffect(() => {
-    if (pageId !== normalizedPageId) {
-      navigate(`/${normalizedPageId}`, { replace: true });
-    }
-  }, [pageId, normalizedPageId, navigate]);
+    setCurrentPage(clampPage(initialPage));
+  }, [initialPage]);
 
   // Help browser prioritize page fonts: current page (preload), adjacent pages (prefetch)
   useEffect(() => {
@@ -200,9 +193,9 @@ const ReadPage = () => {
       if (nextPage === currentPage) return;
 
       setTurnDirection(direction ?? (nextPage > currentPage ? "next" : "prev"));
-      navigate(`/${formatPageId(nextPage)}`);
+      setCurrentPage(nextPage);
     },
-    [currentPage, navigate],
+    [currentPage],
   );
 
   useEffect(() => {
@@ -310,7 +303,7 @@ const ReadPage = () => {
         variant="ghost"
         size="icon-xs"
         aria-label="العودة للرئيسية"
-        onClick={() => navigate("/")}
+        onClick={onBackToIndex}
         className="absolute left-2 top-2 z-20 opacity-40 transition-opacity hover:opacity-100"
       >
         <House />

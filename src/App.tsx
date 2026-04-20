@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import {
   dropCurrentDb,
   initQuranPagesData,
@@ -14,6 +14,7 @@ const App = () => {
   const [quranChaptersError, setQuranChaptersError] = useState<string | null>(
     null,
   );
+  const [selectedPage, setSelectedPage] = useState<number | null>(null);
 
   const initializeQuranChaptersData = async (resetDb = false) => {
     setQuranChaptersLoading(true);
@@ -52,17 +53,23 @@ const App = () => {
         <HashRouter>
           <Routes>
             <Route
-              path="/"
+              path="*"
               element={
-                <ChaptersIndexPage
-                  loading={quranChaptersLoading}
-                  error={quranChaptersError}
-                  onRefreshQuranData={() => initializeQuranChaptersData(true)}
-                />
+                selectedPage === null ? (
+                  <ChaptersIndexPage
+                    loading={quranChaptersLoading}
+                    error={quranChaptersError}
+                    onRefreshQuranData={() => initializeQuranChaptersData(true)}
+                    onSelectPage={(page) => setSelectedPage(page)}
+                  />
+                ) : (
+                  <ReadPage
+                    initialPage={selectedPage}
+                    onBackToIndex={() => setSelectedPage(null)}
+                  />
+                )
               }
             />
-            <Route path="/:pageId" element={<ReadPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </HashRouter>
       </main>

@@ -2,7 +2,7 @@
   "name": "إحكام",
   "short_name": "إحكام",
   "description": "تطبيق لقراءة سور القرآن والتنقل بينها بسهولة.",
-  "start_url": "/Ihkam-Quran-App/#/",
+  "start_url": "/Ihkam-Quran-App/",
   "scope": "/Ihkam-Quran-App/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -20,7 +20,7 @@
       "name": "فهرس السور",
       "short_name": "السور",
       "description": "الانتقال إلى فهرس سور القرآن",
-      "url": "/Ihkam-Quran-App/#/",
+      "url": "/Ihkam-Quran-App/",
       "icons": [
         {
           "src": "icon-192.png",
