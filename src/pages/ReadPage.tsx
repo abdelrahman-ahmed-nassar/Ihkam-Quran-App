@@ -55,6 +55,10 @@ const ReadPage = () => {
     useState<Awaited<ReturnType<typeof getQuranData>>>(null);
   const [layout, setLayout] = useState<QuranLine[]>([]);
   const [loadingError, setLoadingError] = useState<string | null>(null);
+  const [fontLoadingErrorPage, setFontLoadingErrorPage] = useState<
+    number | null
+  >(null);
+  const [readyFontPage, setReadyFontPage] = useState<number | null>(null);
 
   const [gestureStartX, setGestureStartX] = useState<number | null>(null);
   const [gestureDeltaX, setGestureDeltaX] = useState(0);
@@ -94,6 +98,40 @@ const ReadPage = () => {
       for (const link of createdLinks) {
         link.remove();
       }
+    };
+  }, [currentPage]);
+
+  // Hide Quran glyphs until the page-specific font is ready.
+  useEffect(() => {
+    let cancelled = false;
+    const fontName = getQpcFontName(currentPage);
+    const fontQuery = `1em "${fontName}"`;
+
+    const ensureFontReady = async () => {
+      try {
+        if (!document.fonts.check(fontQuery)) {
+          await document.fonts.load(fontQuery);
+        }
+
+        if (cancelled) return;
+
+        if (document.fonts.check(fontQuery)) {
+          setReadyFontPage(currentPage);
+        } else {
+          setFontLoadingErrorPage(currentPage);
+        }
+      } catch (err) {
+        if (cancelled) return;
+
+        setFontLoadingErrorPage(currentPage);
+        console.error("Failed to load page font", err);
+      }
+    };
+
+    void ensureFontReady();
+
+    return () => {
+      cancelled = true;
     };
   }, [currentPage]);
 
@@ -252,6 +290,10 @@ const ReadPage = () => {
     isDraggingPage && dragOffset !== 0
       ? 1 - Math.min(0.18, Math.abs(dragOffset) / 400)
       : 1;
+  const fontLoadingError =
+    fontLoadingErrorPage === currentPage ? "تعذر تحميل خط الصفحة" : null;
+  const errorMessage = loadingError ?? fontLoadingError;
+  const isPageFontReady = readyFontPage === currentPage;
 
   // Compute font-size so every line fits within the screen height.
   // Each line occupies (fontSize × LINE_HEIGHT_RATIO) px vertically.
@@ -275,21 +317,21 @@ const ReadPage = () => {
       </Button>
 
       {/* Error state */}
-      {loadingError && (
+      {errorMessage && (
         <p className="flex h-full items-center justify-center text-destructive">
-          {loadingError}
+          {errorMessage}
         </p>
       )}
 
-      {/* Loading state */}
-      {!wordsMap && !loadingError && (
+      {/* Loading state: either Quran data or current page font is still loading */}
+      {(!wordsMap || !isPageFontReady) && !errorMessage && (
         <p className="flex h-full items-center justify-center text-muted-foreground">
           …
         </p>
       )}
 
       {/* 🧾 Page render */}
-      {wordsMap && (
+      {wordsMap && isPageFontReady && !errorMessage && (
         <section
           className="flex h-full w-full select-none items-center justify-center overflow-hidden"
           dir="rtl"
