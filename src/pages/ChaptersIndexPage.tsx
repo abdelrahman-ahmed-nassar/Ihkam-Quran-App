@@ -1,48 +1,34 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { useNavigate } from "react-router-dom";
-import { dropCurrentDb, initQuranData, quranTable } from "../db";
+import { quranChaptersTable } from "../db";
 import type { Chapter } from "../types/quran";
 
-const ChaptersIndexPage = () => {
+type ChaptersIndexPageProps = {
+  loading: boolean;
+  error: string | null;
+  onRefreshQuranData: () => Promise<void>;
+};
+
+const ChaptersIndexPage = ({
+  loading,
+  error,
+  onRefreshQuranData,
+}: ChaptersIndexPageProps) => {
   const [surahSearch, setSurahSearch] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const quranRecord = useLiveQuery(() => quranTable.get("quran"));
-  const quranData = quranRecord?.data ?? null;
-
-  useEffect(() => {
-    initQuranData()
-      .catch((err) => {
-        console.error("Failed to initialize Quran data:", err);
-        setError("فشل تحميل بيانات القرآن. حاول إعادة تحميل الصفحة.");
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  const refreshQuranData = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      await dropCurrentDb();
-      await initQuranData();
-    } catch (err) {
-      console.error("Failed to refresh Quran data:", err);
-      setError("فشل تحديث بيانات القرآن. حاول مرة أخرى.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const quranChaptersRecord = useLiveQuery(() =>
+    quranChaptersTable.get("quranChapters"),
+  );
+  const quranChaptersData = quranChaptersRecord?.chaptersData ?? null;
 
   const chapters = useMemo<Chapter[]>(() => {
-    if (!quranData?.chapters) return [];
+    if (!quranChaptersData?.chapters) return [];
 
-    return Object.values(quranData.chapters)
+    return Object.values(quranChaptersData.chapters)
       .filter((chapter) => chapter.name_arabic.includes(surahSearch.trim()))
       .sort((a, b) => a.id - b.id);
-  }, [quranData, surahSearch]);
+  }, [quranChaptersData, surahSearch]);
 
   return (
     <section className="page-shell">
@@ -67,7 +53,7 @@ const ChaptersIndexPage = () => {
               </div>
               <button
                 type="button"
-                onClick={refreshQuranData}
+                onClick={() => void onRefreshQuranData()}
                 disabled={loading}
                 className="rounded-md border border-text-main/20 px-3 py-2 text-sm font-medium text-text-main transition hover:bg-text-main/5 disabled:cursor-not-allowed disabled:opacity-60"
               >

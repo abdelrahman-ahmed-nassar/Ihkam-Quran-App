@@ -1,0 +1,688 @@
+{
+    "chapters": {
+        "1": {
+            "id": 1,
+            "name_arabic": "الفاتحة",
+            "verses_count": 7,
+            "startPage": 1
+        },
+        "2": {
+            "id": 2,
+            "name_arabic": "البقرة",
+            "verses_count": 286,
+            "startPage": 2
+        },
+        "3": {
+            "id": 3,
+            "name_arabic": "آل عمران",
+            "verses_count": 200,
+            "startPage": 50
+        },
+        "4": {
+            "id": 4,
+            "name_arabic": "النساء",
+            "verses_count": 176,
+            "startPage": 77
+        },
+        "5": {
+            "id": 5,
+            "name_arabic": "المائدة",
+            "verses_count": 120,
+            "startPage": 106
+        },
+        "6": {
+            "id": 6,
+            "name_arabic": "الأنعام",
+            "verses_count": 165,
+            "startPage": 128
+        },
+        "7": {
+            "id": 7,
+            "name_arabic": "الأعراف",
+            "verses_count": 206,
+            "startPage": 151
+        },
+        "8": {
+            "id": 8,
+            "name_arabic": "الأنفال",
+            "verses_count": 75,
+            "startPage": 177
+        },
+        "9": {
+            "id": 9,
+            "name_arabic": "التوبة",
+            "verses_count": 129,
+            "startPage": 187
+        },
+        "10": {
+            "id": 10,
+            "name_arabic": "يونس",
+            "verses_count": 109,
+            "startPage": 208
+        },
+        "11": {
+            "id": 11,
+            "name_arabic": "هود",
+            "verses_count": 123,
+            "startPage": 221
+        },
+        "12": {
+            "id": 12,
+            "name_arabic": "يوسف",
+            "verses_count": 111,
+            "startPage": 235
+        },
+        "13": {
+            "id": 13,
+            "name_arabic": "الرعد",
+            "verses_count": 43,
+            "startPage": 249
+        },
+        "14": {
+            "id": 14,
+            "name_arabic": "ابراهيم",
+            "verses_count": 52,
+            "startPage": 255
+        },
+        "15": {
+            "id": 15,
+            "name_arabic": "الحجر",
+            "verses_count": 99,
+            "startPage": 262
+        },
+        "16": {
+            "id": 16,
+            "name_arabic": "النحل",
+            "verses_count": 128,
+            "startPage": 267
+        },
+        "17": {
+            "id": 17,
+            "name_arabic": "الإسراء",
+            "verses_count": 111,
+            "startPage": 282
+        },
+        "18": {
+            "id": 18,
+            "name_arabic": "الكهف",
+            "verses_count": 110,
+            "startPage": 293
+        },
+        "19": {
+            "id": 19,
+            "name_arabic": "مريم",
+            "verses_count": 98,
+            "startPage": 305
+        },
+        "20": {
+            "id": 20,
+            "name_arabic": "طه",
+            "verses_count": 135,
+            "startPage": 312
+        },
+        "21": {
+            "id": 21,
+            "name_arabic": "الأنبياء",
+            "verses_count": 112,
+            "startPage": 322
+        },
+        "22": {
+            "id": 22,
+            "name_arabic": "الحج",
+            "verses_count": 78,
+            "startPage": 332
+        },
+        "23": {
+            "id": 23,
+            "name_arabic": "المؤمنون",
+            "verses_count": 118,
+            "startPage": 342
+        },
+        "24": {
+            "id": 24,
+            "name_arabic": "النور",
+            "verses_count": 64,
+            "startPage": 350
+        },
+        "25": {
+            "id": 25,
+            "name_arabic": "الفرقان",
+            "verses_count": 77,
+            "startPage": 359
+        },
+        "26": {
+            "id": 26,
+            "name_arabic": "الشعراء",
+            "verses_count": 227,
+            "startPage": 367
+        },
+        "27": {
+            "id": 27,
+            "name_arabic": "النمل",
+            "verses_count": 93,
+            "startPage": 377
+        },
+        "28": {
+            "id": 28,
+            "name_arabic": "القصص",
+            "verses_count": 88,
+            "startPage": 385
+        },
+        "29": {
+            "id": 29,
+            "name_arabic": "العنكبوت",
+            "verses_count": 69,
+            "startPage": 396
+        },
+        "30": {
+            "id": 30,
+            "name_arabic": "الروم",
+            "verses_count": 60,
+            "startPage": 404
+        },
+        "31": {
+            "id": 31,
+            "name_arabic": "لقمان",
+            "verses_count": 34,
+            "startPage": 411
+        },
+        "32": {
+            "id": 32,
+            "name_arabic": "السجدة",
+            "verses_count": 30,
+            "startPage": 415
+        },
+        "33": {
+            "id": 33,
+            "name_arabic": "الأحزاب",
+            "verses_count": 73,
+            "startPage": 418
+        },
+        "34": {
+            "id": 34,
+            "name_arabic": "سبإ",
+            "verses_count": 54,
+            "startPage": 428
+        },
+        "35": {
+            "id": 35,
+            "name_arabic": "فاطر",
+            "verses_count": 45,
+            "startPage": 434
+        },
+        "36": {
+            "id": 36,
+            "name_arabic": "يس",
+            "verses_count": 83,
+            "startPage": 440
+        },
+        "37": {
+            "id": 37,
+            "name_arabic": "الصافات",
+            "verses_count": 182,
+            "startPage": 446
+        },
+        "38": {
+            "id": 38,
+            "name_arabic": "ص",
+            "verses_count": 88,
+            "startPage": 453
+        },
+        "39": {
+            "id": 39,
+            "name_arabic": "الزمر",
+            "verses_count": 75,
+            "startPage": 458
+        },
+        "40": {
+            "id": 40,
+            "name_arabic": "غافر",
+            "verses_count": 85,
+            "startPage": 467
+        },
+        "41": {
+            "id": 41,
+            "name_arabic": "فصلت",
+            "verses_count": 54,
+            "startPage": 477
+        },
+        "42": {
+            "id": 42,
+            "name_arabic": "الشورى",
+            "verses_count": 53,
+            "startPage": 483
+        },
+        "43": {
+            "id": 43,
+            "name_arabic": "الزخرف",
+            "verses_count": 89,
+            "startPage": 489
+        },
+        "44": {
+            "id": 44,
+            "name_arabic": "الدخان",
+            "verses_count": 59,
+            "startPage": 496
+        },
+        "45": {
+            "id": 45,
+            "name_arabic": "الجاثية",
+            "verses_count": 37,
+            "startPage": 499
+        },
+        "46": {
+            "id": 46,
+            "name_arabic": "الأحقاف",
+            "verses_count": 35,
+            "startPage": 502
+        },
+        "47": {
+            "id": 47,
+            "name_arabic": "محمد",
+            "verses_count": 38,
+            "startPage": 507
+        },
+        "48": {
+            "id": 48,
+            "name_arabic": "الفتح",
+            "verses_count": 29,
+            "startPage": 511
+        },
+        "49": {
+            "id": 49,
+            "name_arabic": "الحجرات",
+            "verses_count": 18,
+            "startPage": 515
+        },
+        "50": {
+            "id": 50,
+            "name_arabic": "ق",
+            "verses_count": 45,
+            "startPage": 518
+        },
+        "51": {
+            "id": 51,
+            "name_arabic": "الذاريات",
+            "verses_count": 60,
+            "startPage": 520
+        },
+        "52": {
+            "id": 52,
+            "name_arabic": "الطور",
+            "verses_count": 49,
+            "startPage": 523
+        },
+        "53": {
+            "id": 53,
+            "name_arabic": "النجم",
+            "verses_count": 62,
+            "startPage": 526
+        },
+        "54": {
+            "id": 54,
+            "name_arabic": "القمر",
+            "verses_count": 55,
+            "startPage": 528
+        },
+        "55": {
+            "id": 55,
+            "name_arabic": "الرحمن",
+            "verses_count": 78,
+            "startPage": 531
+        },
+        "56": {
+            "id": 56,
+            "name_arabic": "الواقعة",
+            "verses_count": 96,
+            "startPage": 534
+        },
+        "57": {
+            "id": 57,
+            "name_arabic": "الحديد",
+            "verses_count": 29,
+            "startPage": 537
+        },
+        "58": {
+            "id": 58,
+            "name_arabic": "المجادلة",
+            "verses_count": 22,
+            "startPage": 542
+        },
+        "59": {
+            "id": 59,
+            "name_arabic": "الحشر",
+            "verses_count": 24,
+            "startPage": 545
+        },
+        "60": {
+            "id": 60,
+            "name_arabic": "الممتحنة",
+            "verses_count": 13,
+            "startPage": 549
+        },
+        "61": {
+            "id": 61,
+            "name_arabic": "الصف",
+            "verses_count": 14,
+            "startPage": 551
+        },
+        "62": {
+            "id": 62,
+            "name_arabic": "الجمعة",
+            "verses_count": 11,
+            "startPage": 553
+        },
+        "63": {
+            "id": 63,
+            "name_arabic": "المنافقون",
+            "verses_count": 11,
+            "startPage": 554
+        },
+        "64": {
+            "id": 64,
+            "name_arabic": "التغابن",
+            "verses_count": 18,
+            "startPage": 556
+        },
+        "65": {
+            "id": 65,
+            "name_arabic": "الطلاق",
+            "verses_count": 12,
+            "startPage": 558
+        },
+        "66": {
+            "id": 66,
+            "name_arabic": "التحريم",
+            "verses_count": 12,
+            "startPage": 560
+        },
+        "67": {
+            "id": 67,
+            "name_arabic": "الملك",
+            "verses_count": 30,
+            "startPage": 562
+        },
+        "68": {
+            "id": 68,
+            "name_arabic": "القلم",
+            "verses_count": 52,
+            "startPage": 564
+        },
+        "69": {
+            "id": 69,
+            "name_arabic": "الحاقة",
+            "verses_count": 52,
+            "startPage": 566
+        },
+        "70": {
+            "id": 70,
+            "name_arabic": "المعارج",
+            "verses_count": 44,
+            "startPage": 568
+        },
+        "71": {
+            "id": 71,
+            "name_arabic": "نوح",
+            "verses_count": 28,
+            "startPage": 570
+        },
+        "72": {
+            "id": 72,
+            "name_arabic": "الجن",
+            "verses_count": 28,
+            "startPage": 572
+        },
+        "73": {
+            "id": 73,
+            "name_arabic": "المزمل",
+            "verses_count": 20,
+            "startPage": 574
+        },
+        "74": {
+            "id": 74,
+            "name_arabic": "المدثر",
+            "verses_count": 56,
+            "startPage": 575
+        },
+        "75": {
+            "id": 75,
+            "name_arabic": "القيامة",
+            "verses_count": 40,
+            "startPage": 577
+        },
+        "76": {
+            "id": 76,
+            "name_arabic": "الانسان",
+            "verses_count": 31,
+            "startPage": 578
+        },
+        "77": {
+            "id": 77,
+            "name_arabic": "المرسلات",
+            "verses_count": 50,
+            "startPage": 580
+        },
+        "78": {
+            "id": 78,
+            "name_arabic": "النبإ",
+            "verses_count": 40,
+            "startPage": 582
+        },
+        "79": {
+            "id": 79,
+            "name_arabic": "النازعات",
+            "verses_count": 46,
+            "startPage": 583
+        },
+        "80": {
+            "id": 80,
+            "name_arabic": "عبس",
+            "verses_count": 42,
+            "startPage": 585
+        },
+        "81": {
+            "id": 81,
+            "name_arabic": "التكوير",
+            "verses_count": 29,
+            "startPage": 586
+        },
+        "82": {
+            "id": 82,
+            "name_arabic": "الإنفطار",
+            "verses_count": 19,
+            "startPage": 587
+        },
+        "83": {
+            "id": 83,
+            "name_arabic": "المطففين",
+            "verses_count": 36,
+            "startPage": 587
+        },
+        "84": {
+            "id": 84,
+            "name_arabic": "الإنشقاق",
+            "verses_count": 25,
+            "startPage": 589
+        },
+        "85": {
+            "id": 85,
+            "name_arabic": "البروج",
+            "verses_count": 22,
+            "startPage": 590
+        },
+        "86": {
+            "id": 86,
+            "name_arabic": "الطارق",
+            "verses_count": 17,
+            "startPage": 591
+        },
+        "87": {
+            "id": 87,
+            "name_arabic": "الأعلى",
+            "verses_count": 19,
+            "startPage": 591
+        },
+        "88": {
+            "id": 88,
+            "name_arabic": "الغاشية",
+            "verses_count": 26,
+            "startPage": 592
+        },
+        "89": {
+            "id": 89,
+            "name_arabic": "الفجر",
+            "verses_count": 30,
+            "startPage": 593
+        },
+        "90": {
+            "id": 90,
+            "name_arabic": "البلد",
+            "verses_count": 20,
+            "startPage": 594
+        },
+        "91": {
+            "id": 91,
+            "name_arabic": "الشمس",
+            "verses_count": 15,
+            "startPage": 595
+        },
+        "92": {
+            "id": 92,
+            "name_arabic": "الليل",
+            "verses_count": 21,
+            "startPage": 595
+        },
+        "93": {
+            "id": 93,
+            "name_arabic": "الضحى",
+            "verses_count": 11,
+            "startPage": 596
+        },
+        "94": {
+            "id": 94,
+            "name_arabic": "الشرح",
+            "verses_count": 8,
+            "startPage": 596
+        },
+        "95": {
+            "id": 95,
+            "name_arabic": "التين",
+            "verses_count": 8,
+            "startPage": 597
+        },
+        "96": {
+            "id": 96,
+            "name_arabic": "العلق",
+            "verses_count": 19,
+            "startPage": 597
+        },
+        "97": {
+            "id": 97,
+            "name_arabic": "القدر",
+            "verses_count": 5,
+            "startPage": 598
+        },
+        "98": {
+            "id": 98,
+            "name_arabic": "البينة",
+            "verses_count": 8,
+            "startPage": 598
+        },
+        "99": {
+            "id": 99,
+            "name_arabic": "الزلزلة",
+            "verses_count": 8,
+            "startPage": 599
+        },
+        "100": {
+            "id": 100,
+            "name_arabic": "العاديات",
+            "verses_count": 11,
+            "startPage": 599
+        },
+        "101": {
+            "id": 101,
+            "name_arabic": "القارعة",
+            "verses_count": 11,
+            "startPage": 600
+        },
+        "102": {
+            "id": 102,
+            "name_arabic": "التكاثر",
+            "verses_count": 8,
+            "startPage": 600
+        },
+        "103": {
+            "id": 103,
+            "name_arabic": "العصر",
+            "verses_count": 3,
+            "startPage": 601
+        },
+        "104": {
+            "id": 104,
+            "name_arabic": "الهمزة",
+            "verses_count": 9,
+            "startPage": 601
+        },
+        "105": {
+            "id": 105,
+            "name_arabic": "الفيل",
+            "verses_count": 5,
+            "startPage": 601
+        },
+        "106": {
+            "id": 106,
+            "name_arabic": "قريش",
+            "verses_count": 4,
+            "startPage": 602
+        },
+        "107": {
+            "id": 107,
+            "name_arabic": "الماعون",
+            "verses_count": 7,
+            "startPage": 602
+        },
+        "108": {
+            "id": 108,
+            "name_arabic": "الكوثر",
+            "verses_count": 3,
+            "startPage": 602
+        },
+        "109": {
+            "id": 109,
+            "name_arabic": "الكافرون",
+            "verses_count": 6,
+            "startPage": 603
+        },
+        "110": {
+            "id": 110,
+            "name_arabic": "النصر",
+            "verses_count": 3,
+            "startPage": 603
+        },
+        "111": {
+            "id": 111,
+            "name_arabic": "المسد",
+            "verses_count": 5,
+            "startPage": 603
+        },
+        "112": {
+            "id": 112,
+            "name_arabic": "الإخلاص",
+            "verses_count": 4,
+            "startPage": 604
+        },
+        "113": {
+            "id": 113,
+            "name_arabic": "الفلق",
+            "verses_count": 5,
+            "startPage": 604
+        },
+        "114": {
+            "id": 114,
+            "name_arabic": "الناس",
+            "verses_count": 6,
+            "startPage": 604
+        }
+    }
+}

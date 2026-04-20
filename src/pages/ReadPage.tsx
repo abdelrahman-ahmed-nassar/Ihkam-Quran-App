@@ -1,8 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import type { Word, WordsMap } from "@/types/mushaf";
-import type { MushafLine } from "@/types/mushaf-layout";
+import type { Word, WordsMap } from "@/types/quran-words";
+import type { QuranLine } from "@/types/quran-layout";
+import {
+  getQuranPagesData,
+  getQuranWordsData,
+  initQuranPagesData,
+  initQuranWordsData,
+} from "@/db";
 
 import { Button } from "@/components/ui/button";
 
@@ -37,7 +43,7 @@ const ReadPage = () => {
   const normalizedPageId = formatPageId(currentPage);
 
   const [wordsMap, setWordsMap] = useState<WordsMap | null>(null);
-  const [layout, setLayout] = useState<MushafLine[]>([]);
+  const [layout, setLayout] = useState<QuranLine[]>([]);
   const [loadingError, setLoadingError] = useState<string | null>(null);
 
   const [targetPageInput, setTargetPageInput] = useState(normalizedPageId);
@@ -87,30 +93,25 @@ const ReadPage = () => {
     };
   }, [currentPage]);
 
-  // Load ALL data once
+  // Load/cached quran data once from IndexedDB
   useEffect(() => {
     const load = async () => {
       try {
-        const [wordsRes, layoutRes] = await Promise.all([
-          fetch(`${import.meta.env.BASE_URL}qpc-v2.json`),
-          fetch(`${import.meta.env.BASE_URL}mushaf-layout/pages.json`),
+        const [cachedWords, cachedPages] = await Promise.all([
+          getQuranWordsData(),
+          getQuranPagesData(),
         ]);
-
-        if (!wordsRes.ok || !layoutRes.ok) {
-          throw new Error(
-            `Failed to fetch mushaf data (${wordsRes.status}/${layoutRes.status})`,
-          );
-        }
-
-        const wordsData: WordsMap = await wordsRes.json();
-        const layoutData: MushafLine[] = await layoutRes.json();
+        const [wordsData, layoutData] = await Promise.all([
+          cachedWords ? Promise.resolve(cachedWords) : initQuranWordsData(),
+          cachedPages ? Promise.resolve(cachedPages) : initQuranPagesData(),
+        ]);
 
         setWordsMap(wordsData);
         setLayout(layoutData);
         setLoadingError(null);
       } catch (err) {
         setLoadingError("تعذر تحميل بيانات المصحف");
-        console.error("Failed to load mushaf data", err);
+        console.error("Failed to load quran data", err);
       }
     };
 
@@ -287,7 +288,7 @@ const ReadPage = () => {
         <section
           className="mx-auto w-full max-w-5xl select-none overflow-x-auto"
           dir="rtl"
-          aria-label={`Mushaf page ${normalizedPageId}`}
+          aria-label={`Quran page ${normalizedPageId}`}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
