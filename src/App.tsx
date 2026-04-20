@@ -13,8 +13,15 @@ import {
   initQuranWordsData,
   initQuranData,
 } from "./db";
+import {
+  applyBackgroundColorSetting,
+  getStoredBackgroundColorSetting,
+  setStoredBackgroundColorSetting,
+  type BackgroundColorSetting,
+} from "./lib/settings";
 import ChaptersIndexPage from "./pages/ChaptersIndexPage";
 import ReadPage from "./pages/ReadPage";
+import SettingsPage from "./pages/SettingsPage";
 
 const parsePageParam = (pageParam: string | undefined) => {
   if (!pageParam) return null;
@@ -28,6 +35,8 @@ const App = () => {
   const [quranChaptersError, setQuranChaptersError] = useState<string | null>(
     null,
   );
+  const [backgroundColorSetting, setBackgroundColorSetting] =
+    useState<BackgroundColorSetting>(() => getStoredBackgroundColorSetting());
 
   const initializeQuranChaptersData = async (resetDb = false) => {
     setQuranChaptersLoading(true);
@@ -57,6 +66,18 @@ const App = () => {
     void initializeQuranChaptersData();
   }, []);
 
+  useEffect(() => {
+    applyBackgroundColorSetting(backgroundColorSetting);
+  }, [backgroundColorSetting]);
+
+  const handleBackgroundColorChange = useCallback(
+    (setting: BackgroundColorSetting) => {
+      setBackgroundColorSetting(setting);
+      setStoredBackgroundColorSetting(setting);
+    },
+    [],
+  );
+
   const ChaptersRoute = () => {
     const navigate = useNavigate();
 
@@ -65,7 +86,20 @@ const App = () => {
         loading={quranChaptersLoading}
         error={quranChaptersError}
         onRefreshQuranData={() => initializeQuranChaptersData(true)}
+        onOpenSettings={() => navigate("/settings")}
         onSelectPage={(page) => navigate(`/page/${page}`)}
+      />
+    );
+  };
+
+  const SettingsRoute = () => {
+    const navigate = useNavigate();
+
+    return (
+      <SettingsPage
+        backgroundColorSetting={backgroundColorSetting}
+        onBackgroundColorChange={handleBackgroundColorChange}
+        onBackToIndex={() => navigate("/")}
       />
     );
   };
@@ -106,6 +140,7 @@ const App = () => {
         <HashRouter>
           <Routes>
             <Route path="/" element={<ChaptersRoute />} />
+            <Route path="/settings" element={<SettingsRoute />} />
             <Route path="/page/:pageNumber" element={<ReadRoute />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

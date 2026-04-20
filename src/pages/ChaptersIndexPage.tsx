@@ -1,14 +1,17 @@
 import { useMemo, useState } from "react";
+import { Settings } from "lucide-react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { quranChaptersTable } from "../db";
 import { InstallPWAButton } from "../components/install-pwa-button";
 import { UpdateQuranDataButton } from "../components/update-quran-data-button";
+import { Button } from "@/components/ui/button";
 import type { Chapter } from "../types/quran";
 
 type ChaptersIndexPageProps = {
   loading: boolean;
   error: string | null;
   onRefreshQuranData: () => Promise<void>;
+  onOpenSettings: () => void;
   onSelectPage: (page: number) => void;
 };
 
@@ -16,6 +19,7 @@ const ChaptersIndexPage = ({
   loading,
   error,
   onRefreshQuranData,
+  onOpenSettings,
   onSelectPage,
 }: ChaptersIndexPageProps) => {
   const [surahSearch, setSurahSearch] = useState("");
@@ -57,6 +61,15 @@ const ChaptersIndexPage = ({
                 disabled={loading}
                 onRefresh={onRefreshQuranData}
               />
+              <Button
+                type="button"
+                variant="outline"
+                className="w-auto"
+                onClick={onOpenSettings}
+              >
+                الإعدادات
+                <Settings data-icon="inline-end" />
+              </Button>
               <InstallPWAButton
                 size="default"
                 variant="outline"

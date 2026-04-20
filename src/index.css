@@ -7,7 +7,7 @@
   --primary-color: #1b5e20;
   --primary-light: #4c8c4a;
   --secondary-color: #ffa000;
-  --bg-color: #f8f9fa;
+  --bg-color: #ffffff;
   --card-bg: rgba(255, 255, 255, 0.88);
   --text-main: #2c3e50;
   --text-muted: #7f8c8d;
@@ -15,6 +15,14 @@
   --warning: #f1c40f;
   --elevation-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
   --verse-hover-bg: #ffa0001a;
+
+  /* colors */
+
+  --soft-bg: #fcf5eb;
+}
+
+:root[data-bg-color="soft"] {
+  --bg-color: var(--soft-bg);
 }
 
 @theme {
