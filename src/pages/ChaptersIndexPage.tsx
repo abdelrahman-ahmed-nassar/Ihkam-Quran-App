@@ -3,6 +3,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { useNavigate } from "react-router-dom";
 import { quranChaptersTable } from "../db";
 import { InstallPWAButton } from "../components/install-pwa-button";
+import { UpdateQuranDataButton } from "../components/update-quran-data-button";
 import type { Chapter } from "../types/quran";
 
 type ChaptersIndexPageProps = {
@@ -52,14 +53,10 @@ const ChaptersIndexPage = ({
                   className="w-full border-0 bg-transparent text-base text-text-main outline-none"
                 />
               </div>
-              <button
-                type="button"
-                onClick={() => void onRefreshQuranData()}
+              <UpdateQuranDataButton
                 disabled={loading}
-                className="rounded-md border border-text-main/20 px-3 py-2 text-sm font-medium text-text-main transition hover:bg-text-main/5 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                تحديث
-              </button>
+                onRefresh={onRefreshQuranData}
+              />
               <InstallPWAButton
                 size="default"
                 variant="outline"
