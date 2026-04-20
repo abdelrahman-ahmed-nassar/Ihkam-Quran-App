@@ -52,8 +52,8 @@ const ReadPage = () => {
     const load = async () => {
       try {
         const [wordsRes, layoutRes] = await Promise.all([
-          fetch("/qpc-v2.json"),
-          fetch("/mushaf-layout/pages.json"),
+          fetch(`${import.meta.env.BASE_URL}qpc-v2.json`),
+          fetch(`${import.meta.env.BASE_URL}mushaf-layout/pages.json`),
         ]);
 
         const wordsData: WordsMap = await wordsRes.json();
