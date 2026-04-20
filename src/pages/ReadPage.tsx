@@ -229,7 +229,7 @@ const ReadPage = () => {
 
   const onTouchEnd = () => {
     if (Math.abs(gestureDeltaX) >= SWIPE_TRIGGER_PX) {
-      if (gestureDeltaX < 0) {
+      if (gestureDeltaX > 0) {
         goToPage(currentPage + 1, "next");
       } else {
         goToPage(currentPage - 1, "prev");
