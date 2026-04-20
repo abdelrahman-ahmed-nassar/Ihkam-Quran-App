@@ -28,7 +28,7 @@ const parseRoutePage = (value?: string) => {
 };
 
 function getQpcFontName(page: number) {
-  return `QCF2${String(page).padStart(3, "0")}`;
+  return `QCF${String(page).padStart(3, "0")}`;
 }
 
 function getPageFontPath(page: number) {
@@ -328,7 +328,7 @@ const ReadPage = () => {
                     key={lineKey}
                     className="mb-2 flex items-center justify-center whitespace-nowrap [text-align-last:center]"
                     style={{
-                      fontFamily: "QCF2BSML",
+                      fontFamily: "QCFBSML",
                     }}
                   >
                     ﷽
