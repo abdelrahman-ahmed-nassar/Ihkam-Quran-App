@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { House } from "lucide-react";
 import { getChapterById } from "@/lib/quran";
 
@@ -19,6 +19,8 @@ const MIN_PAGE = 1;
 const MAX_PAGE = 604;
 const SWIPE_TRIGGER_PX = 60;
 const MAX_DRAG_PX = 120;
+const SWIPE_SETTLE_PX = 16;
+const SWIPE_TRANSITION_MS = 170;
 
 const clampPage = (page: number) =>
   Math.min(MAX_PAGE, Math.max(MIN_PAGE, page));
@@ -56,12 +58,10 @@ const ReadPage = ({ initialPage, onBackToIndex }: ReadPageProps) => {
   >(null);
   const [readyFontPage, setReadyFontPage] = useState<number | null>(null);
 
-  const [gestureStartX, setGestureStartX] = useState<number | null>(null);
-  const [gestureDeltaX, setGestureDeltaX] = useState(0);
-  const [isDraggingPage, setIsDraggingPage] = useState(false);
-  const [turnDirection, setTurnDirection] = useState<"next" | "prev" | null>(
-    null,
-  );
+  const pageContentRef = useRef<HTMLDivElement | null>(null);
+  const dragStartXRef = useRef<number | null>(null);
+  const dragDeltaXRef = useRef(0);
+  const dragRafRef = useRef<number | null>(null);
 
   useEffect(() => {
     setCurrentPage(clampPage(initialPage));
@@ -188,27 +188,39 @@ const ReadPage = ({ initialPage, onBackToIndex }: ReadPageProps) => {
   };
 
   const goToPage = useCallback(
-    (page: number, direction?: "next" | "prev") => {
+    (page: number) => {
       const nextPage = clampPage(page);
       if (nextPage === currentPage) return;
 
-      setTurnDirection(direction ?? (nextPage > currentPage ? "next" : "prev"));
       setCurrentPage(nextPage);
     },
     [currentPage],
   );
 
+  const applyPageTransform = useCallback(
+    (offsetPx: number, withTransition: boolean) => {
+      const element = pageContentRef.current;
+      if (!element) return;
+
+      element.style.transition = withTransition
+        ? `transform ${SWIPE_TRANSITION_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`
+        : "none";
+      element.style.transform = `translate3d(${offsetPx}px, 0, 0)`;
+    },
+    [],
+  );
+
   useEffect(() => {
-    if (!turnDirection) return;
+    applyPageTransform(0, false);
+  }, [currentPage, applyPageTransform]);
 
-    const timeoutId = window.setTimeout(() => {
-      setTurnDirection(null);
-    }, 220);
-
+  useEffect(() => {
     return () => {
-      window.clearTimeout(timeoutId);
+      if (dragRafRef.current !== null) {
+        window.cancelAnimationFrame(dragRafRef.current);
+      }
     };
-  }, [turnDirection]);
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -224,12 +236,12 @@ const ReadPage = ({ initialPage, onBackToIndex }: ReadPageProps) => {
 
       if (event.key === "ArrowLeft") {
         event.preventDefault();
-        goToPage(currentPage + 1, "next");
+        goToPage(currentPage + 1);
       }
 
       if (event.key === "ArrowRight") {
         event.preventDefault();
-        goToPage(currentPage - 1, "prev");
+        goToPage(currentPage - 1);
       }
     };
 
@@ -244,45 +256,50 @@ const ReadPage = ({ initialPage, onBackToIndex }: ReadPageProps) => {
     const point = event.touches[0];
     if (!point) return;
 
-    setGestureStartX(point.clientX);
-    setGestureDeltaX(0);
-    setIsDraggingPage(true);
+    dragStartXRef.current = point.clientX;
+    dragDeltaXRef.current = 0;
+    applyPageTransform(0, false);
   };
 
   const onTouchMove = (event: React.TouchEvent<HTMLElement>) => {
-    if (gestureStartX === null) return;
+    if (dragStartXRef.current === null) return;
 
     const point = event.touches[0];
     if (!point) return;
 
-    setGestureDeltaX(point.clientX - gestureStartX);
+    const delta = point.clientX - dragStartXRef.current;
+    dragDeltaXRef.current = Math.max(
+      -MAX_DRAG_PX,
+      Math.min(MAX_DRAG_PX, delta),
+    );
+
+    if (dragRafRef.current !== null) return;
+
+    dragRafRef.current = window.requestAnimationFrame(() => {
+      dragRafRef.current = null;
+      applyPageTransform(dragDeltaXRef.current, false);
+    });
   };
 
   const onTouchEnd = () => {
-    if (Math.abs(gestureDeltaX) >= SWIPE_TRIGGER_PX) {
-      if (gestureDeltaX > 0) {
-        goToPage(currentPage + 1, "next");
+    const delta = dragDeltaXRef.current;
+
+    if (Math.abs(delta) >= SWIPE_TRIGGER_PX) {
+      const settleOffset = delta > 0 ? SWIPE_SETTLE_PX : -SWIPE_SETTLE_PX;
+      applyPageTransform(settleOffset, true);
+
+      if (delta > 0) {
+        goToPage(currentPage + 1);
       } else {
-        goToPage(currentPage - 1, "prev");
+        goToPage(currentPage - 1);
       }
+    } else {
+      applyPageTransform(0, true);
     }
 
-    setGestureStartX(null);
-    setGestureDeltaX(0);
-    setIsDraggingPage(false);
+    dragStartXRef.current = null;
+    dragDeltaXRef.current = 0;
   };
-
-  const dragOffset = Math.max(
-    -MAX_DRAG_PX,
-    Math.min(MAX_DRAG_PX, gestureDeltaX),
-  );
-  const settleOffset =
-    turnDirection === "next" ? -28 : turnDirection === "prev" ? 28 : 0;
-  const pageOffset = isDraggingPage ? dragOffset : settleOffset;
-  const pageOpacity =
-    isDraggingPage && dragOffset !== 0
-      ? 1 - Math.min(0.18, Math.abs(dragOffset) / 400)
-      : 1;
   const fontLoadingError =
     fontLoadingErrorPage === currentPage ? "تعذر تحميل خط الصفحة" : null;
   const errorMessage = loadingError ?? fontLoadingError;
@@ -326,7 +343,7 @@ const ReadPage = ({ initialPage, onBackToIndex }: ReadPageProps) => {
       {/* 🧾 Page render */}
       {wordsMap && isPageFontReady && !errorMessage && (
         <section
-          className="flex h-full w-full select-none items-center justify-center overflow-hidden"
+          className="flex h-full w-full select-none items-center justify-center overflow-hidden [touch-action:pan-y]"
           dir="rtl"
           aria-label={`Quran page ${normalizedPageId}`}
           onTouchStart={onTouchStart}
@@ -335,15 +352,12 @@ const ReadPage = ({ initialPage, onBackToIndex }: ReadPageProps) => {
           onTouchCancel={onTouchEnd}
         >
           <div
-            className={`mx-auto w-max max-w-full px-3 [unicode-bidi:embed] ${
-              isDraggingPage ? "" : "transition-transform duration-200 ease-out"
-            }`}
+            ref={pageContentRef}
+            className="mx-auto w-max max-w-full px-3 [unicode-bidi:embed] will-change-transform"
             style={{
               fontFamily: getQpcFontStack(currentPage),
               fontSize: dynamicFontSize,
               lineHeight: LINE_HEIGHT_RATIO,
-              transform: `translateX(${pageOffset}px)`,
-              opacity: pageOpacity,
             }}
           >
             {pageLines.map((line, idx) => {
