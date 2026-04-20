@@ -1,11 +1,11 @@
 @font-face {
   font-family: "QCFBSML";
-  src: url("/fonts/BSML.ttf") format("truetype");
+  src: url("/fonts/BSML.woff2") format("truetype");
 }
 
 @font-face {
   font-family: "UthmanicHafs";
-  src: url("/fonts/UthmanicHafs.ttf") format("truetype");
+  src: url("/fonts/UthmanicHafs.woff2") format("truetype");
   font-display: swap;
 }
 

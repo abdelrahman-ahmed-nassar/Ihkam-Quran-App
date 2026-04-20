@@ -40,7 +40,7 @@ function getQpcFontStack(page: number) {
 }
 
 function getPageFontPath(page: number) {
-  return `${import.meta.env.BASE_URL}fonts/QUL/QUL${formatPageId(page)}.ttf`;
+  return `${import.meta.env.BASE_URL}fonts/QUL/QUL${formatPageId(page)}.woff2`;
 }
 
 const ReadPage = () => {
@@ -82,7 +82,7 @@ const ReadPage = () => {
       const link = document.createElement("link");
       link.rel = page === currentPage ? "preload" : "prefetch";
       link.as = "font";
-      link.type = "font/ttf";
+      link.type = "font/woff2";
       link.href = getPageFontPath(page);
       link.crossOrigin = "anonymous";
 
