@@ -72,11 +72,6 @@ body {
   min-height: 100dvh;
   font-family: var(--font-sans);
   background-color: var(--bg-color);
-  background-image: radial-gradient(
-    var(--primary-light) 0.5px,
-    transparent 0.5px
-  );
-  background-size: 20px 20px;
   color: var(--text-main);
 }
 
