@@ -31,6 +31,8 @@ const clampPage = (page: number) => {
 const formatPageId = (page: number) => page.toString().padStart(3, "0");
 const toEasternArabicDigits = (value: number | string) =>
   String(value).replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)]);
+const isArabicNumberWord = (value: string) =>
+  /^[\u0660-\u0669\u06F0-\u06F9]+$/.test(value.trim());
 
 function getQpcFontName(page: number) {
   return `QCF${String(page).padStart(3, "0")}`;
@@ -42,6 +44,10 @@ function getQpcFontStack(page: number) {
 
 function getPageFontPath(page: number) {
   return `${import.meta.env.BASE_URL}fonts/QUL/QUL${formatPageId(page)}.woff2`;
+}
+
+function getTopBannerPath() {
+  return `${import.meta.env.BASE_URL}images/top.png`;
 }
 
 type ReadPageProps = {
@@ -390,10 +396,15 @@ const ReadPage = ({
                 return (
                   <div
                     key={lineKey}
-                    className="w-full overflow-hidden whitespace-nowrap text-center font-bold [text-align-last:center]"
-                    style={{ fontFamily: "UthmanicHafs, Arial, sans-serif" }}
+                    className="mx-auto flex h-[1.9em] w-full max-w-[18em] items-center justify-center overflow-hidden whitespace-nowrap bg-contain bg-center bg-no-repeat px-[2.7em] text-center font-bold text-[0.9em] leading-none [text-align-last:center]"
+                    style={{
+                      fontFamily: "UthmanicHafs, Arial, sans-serif",
+                      backgroundImage: `url("${getTopBannerPath()}")`,
+                    }}
                   >
-                    سورة {chapter?.name_arabic ?? line.surah_number}
+                    <span className="inline-block -translate-y-0.5">
+                      سورة {chapter?.name_arabic ?? line.surah_number}
+                    </span>
                   </div>
                 );
               }
@@ -402,7 +413,7 @@ const ReadPage = ({
                 return (
                   <div
                     key={lineKey}
-                    className="flex w-full items-center justify-center overflow-hidden whitespace-nowrap [text-align-last:center]"
+                    className="flex w-full items-center justify-center overflow-hidden whitespace-nowrap text-[#6b3200] [text-align-last:center]"
                     style={{
                       fontFamily:
                         "QCFBSML, UthmanicHafs, Tahoma, Arial, sans-serif",
@@ -433,7 +444,11 @@ const ReadPage = ({
                     <span
                       key={word.id}
                       id={`word-${word.id}`}
-                      className="inline-block align-baseline text-[1em]"
+                      className={`inline-block align-baseline text-[1em] ${
+                        isArabicNumberWord(word.textUnicode)
+                          ? "text-[#6b3200]"
+                          : ""
+                      }`}
                       data-location={word.location}
                     >
                       {word.textGlyph}
