@@ -1,14 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { House } from "lucide-react";
-import { getChapterById } from "@/lib/quran";
 
 import type { Word, WordsMap } from "@/types/quran-words";
 import type { QuranLine } from "@/types/quran-layout";
 import {
-  getQuranData,
   getQuranPagesData,
   getQuranWordsData,
-  initQuranData,
   initQuranPagesData,
   initQuranWordsData,
 } from "@/db";
@@ -73,8 +70,6 @@ const ReadPage = ({
   );
 
   const [wordsMap, setWordsMap] = useState<WordsMap | null>(null);
-  const [chaptersData, setChaptersData] =
-    useState<Awaited<ReturnType<typeof getQuranData>>>(null);
   const [layout, setLayout] = useState<QuranLine[]>([]);
   const [loadingError, setLoadingError] = useState<string | null>(null);
   const [fontLoadingErrorPage, setFontLoadingErrorPage] = useState<
@@ -160,19 +155,16 @@ const ReadPage = ({
   useEffect(() => {
     const load = async () => {
       try {
-        const [cachedWords, cachedPages, cachedChapters] = await Promise.all([
+        const [cachedWords, cachedPages] = await Promise.all([
           getQuranWordsData(),
           getQuranPagesData(),
-          getQuranData(),
         ]);
-        const [wordsData, layoutData, chapterData] = await Promise.all([
+        const [wordsData, layoutData] = await Promise.all([
           cachedWords ? Promise.resolve(cachedWords) : initQuranWordsData(),
           cachedPages ? Promise.resolve(cachedPages) : initQuranPagesData(),
-          cachedChapters ? Promise.resolve(cachedChapters) : initQuranData(),
         ]);
 
         setWordsMap(wordsData);
-        setChaptersData(chapterData);
         setLayout(layoutData);
         setLoadingError(null);
       } catch (err) {
@@ -190,15 +182,6 @@ const ReadPage = ({
 
     return Object.values(wordsMap).sort((a, b) => a.id - b.id);
   }, [wordsMap]);
-
-  const quranRecord = useMemo(() => {
-    if (!chaptersData) return undefined;
-
-    return {
-      id: "quranChapters",
-      chaptersData,
-    };
-  }, [chaptersData]);
 
   // 🔥 Filter lines for current page
   const pageLines = useMemo(() => {
@@ -392,22 +375,17 @@ const ReadPage = ({
               const lineKey = `${line.line_number}-${idx}`;
 
               if (line.line_type === "surah_name") {
-                const chapter = getChapterById(
-                  quranRecord,
-                  String(line.surah_number),
-                );
-
                 return (
                   <div
                     key={lineKey}
-                    className="mx-auto flex h-[1.9em] w-full max-w-[18em] items-center justify-center overflow-hidden whitespace-nowrap bg-contain bg-center bg-no-repeat px-[2.7em] text-center font-bold text-[0.9em] leading-none [text-align-last:center]"
+                    className="mx-auto flex h-[1.8em] w-full max-w-[18em] items-center justify-center overflow-hidden whitespace-nowrap bg-contain bg-center bg-no-repeat px-[2.7em] text-center text-[1.25em] leading-none [text-align-last:center]"
                     style={{
-                      fontFamily: "UthmanicHafs, Arial, sans-serif",
+                      fontFamily: "surah-name-v4-icon, Arial, sans-serif",
                       backgroundImage: `url("${getTopBannerPath()}")`,
                     }}
                   >
-                    <span className="inline-block -translate-y-0.5">
-                      سورة {chapter?.name_arabic ?? line.surah_number}
+                    <span className="inline-block">
+                      {`surah${line.surah_number.toString().padStart(3, "0")}`}
                     </span>
                   </div>
                 );
