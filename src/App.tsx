@@ -85,7 +85,6 @@ const App = () => {
       <ChaptersIndexPage
         loading={quranChaptersLoading}
         error={quranChaptersError}
-        onRefreshQuranData={() => initializeQuranChaptersData(true)}
         onOpenSettings={() => navigate("/settings")}
         onSelectPage={(page) => navigate(`/page/${page}`)}
       />

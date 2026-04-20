@@ -3,14 +3,12 @@ import { Settings } from "lucide-react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { quranChaptersTable } from "../db";
 import { InstallPWAButton } from "../components/install-pwa-button";
-import { UpdateQuranDataButton } from "../components/update-quran-data-button";
 import { Button } from "@/components/ui/button";
 import type { Chapter } from "../types/quran";
 
 type ChaptersIndexPageProps = {
   loading: boolean;
   error: string | null;
-  onRefreshQuranData: () => Promise<void>;
   onOpenSettings: () => void;
   onSelectPage: (page: number) => void;
 };
@@ -18,7 +16,6 @@ type ChaptersIndexPageProps = {
 const ChaptersIndexPage = ({
   loading,
   error,
-  onRefreshQuranData,
   onOpenSettings,
   onSelectPage,
 }: ChaptersIndexPageProps) => {
@@ -57,10 +54,6 @@ const ChaptersIndexPage = ({
                   className="w-full border-0 bg-transparent text-base text-text-main outline-none"
                 />
               </div>
-              <UpdateQuranDataButton
-                disabled={loading}
-                onRefresh={onRefreshQuranData}
-              />
               <Button
                 type="button"
                 variant="outline"
